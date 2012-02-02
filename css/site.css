@@ -1,0 +1,509 @@
+@charset "UTF-8";
+/* CSS Document */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+article,footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+body {
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-image:url(/images/93.gif);
+}
+a img {
+	border: none;
+}
+#skip a, #skip a:hover, #skip a:visited 
+{ 
+position:absolute; 
+left:0px; 
+top:-500px; 
+width:1px; 
+height:1px; 
+overflow:hidden;
+} 
+
+#skip a:active, #skip a:focus 
+{ 
+position:static; 
+width:auto; 
+height:auto; 
+}
+
+#container {
+	width: 80%;  /* this will create a container 80% of the browser width */
+	min-width: 800px;
+	background: #FFFFFF;
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	border: 1px solid #000000;
+	text-align: left; /* this overrides the text-align: center on the body element. */
+}
+header#sitewide {
+	background-color: #E4E2BC;
+	padding: 10px 10px 0 10px;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+header#sitewide h1 {
+	margin: 0; /* zeroing the margin of the last element in the #header div will avoid margin collapse - an unexplainable space between divs. If the div has a border around it, this is not necessary as that also avoids the margin collapse */
+	padding: 10px 0; /* using padding instead of margin will allow you to keep the element away from the edges of the div */
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+#navbar {
+	background-color: #000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+#mainContent {
+	padding: 0 20px; /* remember that padding is the space inside the div box and margin is the space outside the div box */
+	background: #FFFFFF;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	text-align: center;
+	position: relative;
+	z-index: 0;
+}
+#profileBasicBar {
+	position: relative;
+	margin: 10px;
+	width: 33%;
+	background: #DDDDDD;
+	padding: 0 10px 15px 10px;
+	float: left;
+	z-index: 10;
+}
+#profileBasicEdit {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 5px 5px 0 0;
+	z-index: 25;
+}
+section {
+	position: relative;
+}
+section header {
+	position: relative;
+	margin: 0 5px;
+	padding: 0 10px;
+}
+article {
+	position: relative;
+	margin: 5px;
+	padding: 10px;
+}
+article.event {
+	display: table;
+	width: 100%;
+}
+article.event header {
+	display: table-cell;
+	width: 15%;
+}
+article.event header h1 {
+	font-size:xx-large;
+	margin: auto 0;
+	padding: 0;
+}
+article.event header h2 {
+	font-size:medium;
+	margin: auto 0;
+	padding: 0;
+}
+article.event div {
+	display: table-cell;
+	vertical-align: middle;
+	width: 85%;
+	line-height: 1;
+}
+article.event div h4 {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 5px;
+}
+article.event span.speaker, article.event span.speaker a, article.event span.inforow {
+	color: #999;
+	margin: 0;
+	padding: 0;
+}
+article.event span.speaker, article.event span.speaker a{
+	font-size: small;
+}
+article.event span.inforow, article.event p {
+	font-size: x-small;
+	line-height: normal;
+}
+p.profileAbst {
+	display: table;
+	margin: 5px auto;
+	height: auto;
+}
+p.profileSub {
+	display: table;
+	margin: 5px auto;
+	font-style:italic;
+	font-size: x-small;
+}
+span.tags {
+	background-color:#EEE;
+	font-size: x-small;
+}
+span.tags a {
+	color: green;
+}
+.profileTool {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-right: 5px;
+	z-index: 25;
+}
+p.profileAbst {
+	font-size: small;
+}
+div.clear {
+	clear: both;
+}
+footer {
+	margin: 0;
+	padding: 10px;
+	background-color: #DDDDDD;
+	text-align: center;
+}
+#container #header #navbar h2 {
+	color: #FFF;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+/* Navigation bar styles */
+nav ul {
+	position: relative;
+	list-style:none;
+}
+nav ul li {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+/* Main navigation in header */
+nav#main {
+	clear: both;
+}
+nav#main ul {
+	padding-top: 10px;
+	width: 525px;
+	margin: auto;
+	z-index: 50;
+}
+nav#main ul li {
+	display:inline;
+}
+nav#main ul li a {
+	text-decoration:none;
+	padding:5px 0;
+	width:100px;
+	color:#eee;
+	float:left;
+	background-color: #111111;
+}
+nav#main ul li a {
+	text-align:center;
+	border-left:1px solid #fff;
+}
+nav#main ul li a:hover {
+	border-bottom: 1px dotted #ba0000;
+	color:#000;
+	background-color: #CCC;
+}
+
+/* Logged-in panel navigation */
+nav#panel {
+	display: table;
+	margin: 0px auto;
+}
+nav#panel ul {
+	display: table-row;
+	width: 240px;
+	left: auto;
+	right: auto;
+}
+nav#panel ul li {
+	display: table-cell;
+	text-size: xx-small;
+}
+nav#panel ul li a {
+	text-decoration:none;
+	margin: 0 2px;
+	padding:5px;
+	color:#eee;
+	background-color: #0473B6;
+	text-align:center;
+	border-top: 1px solid #fff;
+	border-left: 2px solid #fff;
+	border-radius: 7px;
+}
+nav#panel ul li a:hover {
+	border-top: 1px solid #3956A1;
+	border-left: 1px dotted #3956A1;
+	color:#000;
+	background-color: #D2D2FE;
+}
+
+/* About page navigation */
+nav.aboutfaq ul {
+	padding:0;
+	margin:0;
+}
+
+nav#abouttop ul li {
+	display: inline;
+}
+
+#bigbutton {
+	width: 200px;
+	margin: auto;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#bigbutton a {
+	width: 100%;
+	text-decoration:none;
+	color:#eee;
+	float:left;
+	background-color: #485e49;
+	font-size:xx-large;
+}
+#bigbutton a:hover {
+	border-bottom: 1px dotted #ba0000;
+	color:#000;
+	background-color: #a2b3a1;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#loggedInPanel, #loginForm {
+	width: 240px;
+	border: 1px solid #270644;
+	border-radius: 10px;
+	text-align: center;
+	font-size: x-small;
+	margin: 20px auto;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#loginForm {
+	padding: 5px 10px;
+}
+#loggedInPanel {
+	padding: 20px 10px;
+}
+.loginRow {
+	display: table-row;
+}
+#loginForm label, #loginform input{
+	display: table-cell;
+	text-align: right;
+}
+#loginemail, #loginpassword {
+	width: 175px;
+}
+#theform {
+	max-width: 800px;
+	margin: auto;
+}
+#theform fieldset {
+	height: 20em;
+	width: 30%;
+	border: 0;
+	margin: 0;
+	padding: 1.5%;
+	float: left;
+	}
+#theform fieldset legend {
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 4em;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #000000;
+	}
+#theform fieldset legend span {
+	display: none;
+	}
+#theform fieldset h3 {
+	height: 4em;
+	font-size: 1em;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	}
+#theform fieldset div.help {
+	color: #485e49;
+	font-size: 0.7em;
+	font-weight: bold;
+	height: 5em;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	}
+.error {
+	font-size: 0.7em;
+	font-weight: bold;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	text-align: center;
+}
+#theform fieldset label {
+	font-size: 0.7em;
+	display: block;
+	line-height: 1.5em;
+	}
+#theform fieldset input {
+	font-size: 0.8em;
+	height: 1.2em;
+	}
+
+/* Part 4 Styling */
+#theform #pt4 {
+	width: 75%;
+	height: 5em;
+	margin: 0 12.5%;
+	}
+#theform #pt4 legend {
+	display: none;
+	}
+#theform #pt4 h3 {
+	display: none;
+	}
+#theform #pt4 #disclaimer {
+	width: 22em;
+	float: left;
+	padding: 10px;
+	font-size: 0.7em;
+	}
+#theform #pt4 input {
+	height: 5em;
+	font-size: 1em;
+	width: 18em;
+	color: #666666; 
+	background: #f3f3f3;
+	font-weight: bold;
+	border-bottom: 	1px solid #999999;
+	border-right: 1px solid #999999;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;	
+	float: right;
+	}
+	
+#profile, #research, #lecture {
+  	margin-left: auto;
+	margin-right: auto;
+  	padding: 10px;
+  	min-width: 500px;
+  	max-width: 600px;
+  	width: 560px;
+}
+
+#profile fieldset, #research fieldset, #lecture fieldset {
+  border-color: #000;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;        /* padding in fieldset support spotty in IE */
+  margin: 0;
+}
+
+fieldset br {
+	clear: left;
+}
+
+fieldset label {
+	font-size: small;
+}
+div.taglabel {
+	line-height: 1;
+}
+div.taglabel small {
+	font-size: x-small;
+	color: #CCC;
+}
+
+fieldset input, fieldset textarea, ul.token-input-list, ul.token-input-list-facebook {
+	border: 1px solid #999;
+}
+
+fieldset input, ul.token-input-list, ul.token-input-list-facebook {
+	height: 21px;
+}
+
+label.twocol {
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 150px;
+	padding: 0; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: right; 
+}
+
+input.twocol, span.twocol, textarea.twocol, ul.token-input-list, ul.token-input-list-facebook {
+	display: block;
+	margin: 5px 0 0 10px;
+	float: left;
+	overflow: hidden;
+    width: 320px;
+    cursor: text;
+    font-size: 11px;
+    font-family: Verdana;
+	text-align: left;
+	padding: 0;
+    background-color: #fff;
+    list-style-type: none;
+}
+
+select.twocol {
+	float: left;
+	margin: 5px 0 0 10px;
+}
+	
+#tt {position:absolute; display:block; background:url(/images/tt_left.gif) top left no-repeat}
+#tttop {display:block; height:5px; margin-left:5px; background:url(/images/tt_top.gif) top right no-repeat; overflow:hidden}
+#ttcont {display:block; padding:2px 12px 3px 7px; margin-left:5px; background:#666; color:#FFF}
+#ttbot {display:block; height:5px; margin-left:5px; background:url(/images/tt_bottom.gif) top right no-repeat; overflow:hidden}
+.tiptext {font-size:x-small;}
+
+#overlay {
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    background: url(/images/overlay.png) repeat 0 0;
+    display: none;
+    text-align: center;
+}
+
+#overlay-panel {
+	position: relative;
+	margin: 10% auto 0 auto;
+    width: 350px;
+    background: #FFF;
+	z-index: 1000;
+	border-radius: 15px;
+	box-shadow: 10px 10px 5px #222;
+}
+
+#overlay-panel #lbmini {
+	margin: 0 auto;
+	padding: 0;
+}
+
+.object_ok
+{
+border: 1px solid green;
+color: #333333;
+}
+
+.object_error
+{
+border: 1px solid #AC3962;
+color: #333333;
+}
