@@ -1,0 +1,15 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^lecturebank.org [NC]
+RewriteRule ^(.*)$ http://www.lecturebank.org/$1 [L,R=301]
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^search/(\w+)\/?$ ./search.php?tag=$1
+RewriteRule ^events\/?$ ./show-events.php
+
+RewriteRule ^(\w+)\/?$ ./profile.php?user=$1
+
+Header set P3P "policyref=\"/w3c/p3p.xml\", CP=\"ALL DSP COR LAW CURa ADMa DEVa TAIa PSAi PSDi IVAi IVDi CONi OUR UNRi PUBi NOR IND PHY ONL UNI COM NAV INT DEM CNT STA PRE LOC\""
