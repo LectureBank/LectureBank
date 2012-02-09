@@ -2,7 +2,7 @@
 define('DB_HOST', 'internal-db.s124943.gridserver.com');
 define('DB_USER', 'db124943');
 define('DB_PASSWORD', 'Grow$T3M');
-define('DB_DATABASE', 'db124943_lecturebank');
+define('DB_DATABASE', 'db124943_lecturebank_test');
 
 //Connect to mysql server
 $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
