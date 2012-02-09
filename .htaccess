@@ -7,7 +7,7 @@ RewriteRule ^(.*)$ http://www.lecturebank.org/$1 [L,R=301]
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
-RewriteRule ^search/(\w+)\/?$ ./search.php?tag=$1
+RewriteRule ^search/(\w+)\/?$ ./supersearch.php?query=$1
 RewriteRule ^events\/?$ ./show-events.php
 
 RewriteRule ^(\w+)\/?$ ./profile.php?user=$1
