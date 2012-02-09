@@ -62,7 +62,7 @@ include('header.php');
 			echo('<div class="resdetails">');
 			$instid = $inst['id'];
 			
-			$instpeopleqry = "SELECT name, username, field FROM instpeople WHERE instid = '$instid' LIMIT 10";
+			$instpeopleqry = "SELECT users.name AS name, users.username AS username, fields.name AS field FROM users, userinstitutions, userfields, fields WHERE userinstitutions.instid = '$instid' AND users.id_user = userinstitutions.uid AND userfields.uid = users.id_user AND fields.code = userfields.fcode LIMIT 10";
 			$instpeople = mysql_query($instpeopleqry);
 			$numpeople = mysql_num_rows($instpeople);
 			if($numpeople > 0){
