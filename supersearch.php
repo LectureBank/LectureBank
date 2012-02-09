@@ -62,7 +62,7 @@ include('header.php');
 			echo('<div class="resdetails">');
 			$instid = $inst['id'];
 			
-			$instpeopleqry = "SELECT name, username, field FROM instpeople WHERE instid = $instid LIMIT 10";
+			$instpeopleqry = "SELECT name, username, field FROM instpeople WHERE instid = '$instid' LIMIT 10";
 			$instpeople = mysql_query($instpeopleqry);
 			$numpeople = mysql_num_rows($instpeople);
 			if($numpeople > 0){
@@ -77,7 +77,7 @@ include('header.php');
 			}
 			@mysql_free_result($instpeople);
 			
-			$instlectureqry = "SELECT title, locdetail, start FROM lectures WHERE loc_id = $instid ORDER BY start DESC LIMIT 10";
+			$instlectureqry = "SELECT title, locdetail, start FROM lectures WHERE loc_id = '$instid' ORDER BY start DESC LIMIT 10";
 			$instlectures = mysql_query($instlectureqry);
 			$numlectures = mysql_num_rows($instlectures);
 			if($numlectures > 0){
@@ -108,7 +108,7 @@ include('header.php');
 		foreach($peoplelist as $person) {
 			$persid = $person['id'];
 			
-			$persfieldqry = "SELECT fields.name AS fname FROM fields, userfields WHERE userfields.uid = $persid && fields.code = userfields.fcode";
+			$persfieldqry = "SELECT fields.name AS fname FROM fields, userfields WHERE userfields.uid = '$persid' && fields.code = userfields.fcode";
 			$persfield = mysql_query($persfieldqry);
 			$pfield = mysql_fetch_row($persfield);
 			@mysql_free_result($persfield);
@@ -121,7 +121,7 @@ include('header.php');
 				echo('<h2>'.$person['inst'].'</h2>');
 			}
 			
-			$userintqry = "SELECT tags.id, tags.tag FROM tags, userinterests WHERE userinterests.uid = $persid && tags.id = userinterests.intid";
+			$userintqry = "SELECT tags.id, tags.tag FROM tags, userinterests WHERE userinterests.uid = '$persid' && tags.id = userinterests.intid";
 			$interests = mysql_query($userintqry);
 			echo('<span class="tags">');
 			while($interest = mysql_fetch_array($interests)) {
@@ -132,7 +132,7 @@ include('header.php');
 			echo('</header>');
 			echo('<div class="resdetails">');
 			
-			$persresearchqry = "SELECT title, yr FROM research WHERE uid = $persid ORDER BY yr DESC LIMIT 10";
+			$persresearchqry = "SELECT title, yr FROM research WHERE uid = '$persid' ORDER BY yr DESC LIMIT 10";
 			$perspapers = mysql_query($persresearchqry);
 			$numpapers = mysql_num_rows($perspapers);
 			if($numpapers > 0){
@@ -147,7 +147,7 @@ include('header.php');
 			}
 			@mysql_free_result($perspapers);
 			
-			$perslectureqry = "SELECT title, locdetail, start FROM lectures WHERE creator = $persid ORDER BY start DESC LIMIT 10";
+			$perslectureqry = "SELECT title, locdetail, start FROM lectures WHERE creator = '$persid' ORDER BY start DESC LIMIT 10";
 			$perslectures = mysql_query($perslectureqry);
 			$numlectures = mysql_num_rows($perslectures);
 			if($numlectures > 0){
@@ -198,7 +198,7 @@ include('header.php');
 				echo('</section>');
 			}
 			
-			$papertagqry = "SELECT tags.id, tags.tag FROM tags, researchtags WHERE researchtags.research = $paperid && tags.id = researchtags.tag";
+			$papertagqry = "SELECT tags.id, tags.tag FROM tags, researchtags WHERE researchtags.research = '$paperid' && tags.id = researchtags.tag";
 			$papertags = mysql_query($papertagqry);
 			echo('<span class="tags">');
 			while($papertag = mysql_fetch_array($papertags)) {
@@ -234,7 +234,7 @@ include('header.php');
 				echo('</section>');
 			}
 			
-			$talktagqry = "SELECT tags.id, tags.tag FROM tags, lecturetags WHERE lecturetags.lecture = $talkid && tags.id = lecturetags.tag";
+			$talktagqry = "SELECT tags.id, tags.tag FROM tags, lecturetags WHERE lecturetags.lecture = '$talkid' && tags.id = lecturetags.tag";
 			$talktags = mysql_query($talktagqry);
 			echo('<span class="tags">');
 			while($talktag = mysql_fetch_array($talktags)) {
