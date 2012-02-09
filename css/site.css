@@ -71,6 +71,7 @@ div.resdetails ul {
 div.resdetails ul li {
 	list-style: none;
 	padding-left: 25px;
+	padding-top: 2px;
 }
 
 ul.lecture li {
