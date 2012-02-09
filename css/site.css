@@ -64,19 +64,26 @@ div.resdetails ul {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
+	padding-left: 1.5%;
 	padding-bottom: 0;
 }
 
-ul.lecture {
-	list-style-image: url(../images/bullet-lecture.png)
+div.resdetails ul li {
+	list-style: none;
+	padding-left: 25px;
 }
 
-ul.person {
-	list-style-image: url(../images/bullet-person.png)
+ul.lecture li {
+	
+	background: url(../images/bullet-lecture.png) no-repeat center left;
 }
 
-ul.research {
-	list-style-image: url(../images/bullet-research.png)
+ul.person li {
+	background: url(../images/bullet-person.png) no-repeat center left;
+}
+
+ul.research li{
+	background: url(../images/bullet-research.png) no-repeat center left;
 }
 
 #skip a, #skip a:hover, #skip a:visited 
