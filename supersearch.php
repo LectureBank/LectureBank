@@ -70,7 +70,7 @@ include('header.php');
 				echo('<h4>People</h4>');
 				echo('<ul class="person">');
 				while($person = mysql_fetch_array($instpeople)) {
-					echo('<li><a href="'.$person['username'].'">'.$person['name'].'</a> - '.$person['field'].'</li>');
+					echo('<li><a href="/'.$person['username'].'">'.$person['name'].'</a> - '.$person['field'].'</li>');
 				}
 				echo('</ul>');
 				echo('</section>');
@@ -114,7 +114,7 @@ include('header.php');
 			@mysql_free_result($persfield);
 			
 			echo('<section class="result"><header>');
-			echo('<h1><a href="'.$person['username'].'">'.$person['name'].'</a></h1>');
+			echo('<h1><a href="/'.$person['username'].'">'.$person['name'].'</a></h1>');
 			if(!empty($pfield)){
 				echo('<h2>'.$pfield[0].', '.$person['inst'].'</h2>');
 			} else {
