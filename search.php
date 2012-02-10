@@ -1,7 +1,7 @@
 <?php
 require_once('config/database-connect.php');
 
-$input = str_replace('_',' ',clean($_GET["tag"]));
+$input = str_replace('+',' ',clean($_GET["tag"]));
 
 $qry = "SELECT id, tag FROM tags WHERE tag='$input' OR id='$input'";
 $result = mysql_query($qry);

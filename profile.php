@@ -48,7 +48,7 @@ if(($protected && $logged_in) || !$protected) {
 	$qry = "SELECT tags.id, tags.tag FROM tags, userinterests WHERE userinterests.uid = $uid && tags.id = userinterests.intid";
 	$result = mysql_query($qry);
 	while($row = mysql_fetch_array($result)) {
-		$interests[] = '<a href="/search/'.str_replace(" ","_",$row['tag']).'">'.$row['tag'].'</a>';
+		$interests[] = '<a href="/search/'.str_replace(" ","+",$row['tag']).'" rel="tag">'.$row['tag'].'</a>';
 	}
 	@mysql_free_result($result);
 	
