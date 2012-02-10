@@ -3,7 +3,19 @@ require_once('config/database-connect.php');
 
 function geocode_institution($location) {
 	$geocode_request_str=str_replace(" ", "+", $location);
-		$google_response=file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".$geocode_request_str."&bounds=38,-80|45,-70&sensor=false");
+	
+				$gquery_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$geocode_request_str."&bounds=38,-80|45,-70&sensor=false";
+	
+	            $ch = curl_init();
+                $timeout = 5; // set to zero for no timeout
+                curl_setopt ($ch, CURLOPT_URL, $gquery_url);
+                curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+                $google_response = curl_exec($ch);
+                curl_close($ch);
+				
+		// $google_response=file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".$geocode_request_str."&bounds=38,-80|45,-70&sensor=false");
+		
 		$google_result = json_decode($google_response, true);
 		if($google_result['status'] == "OK") {
 			$address = array();

@@ -59,7 +59,7 @@
 		$qry = "SELECT tags.tag FROM tags, lecturetags WHERE lecturetags.lecture = ".$event['id']." AND tags.id = lecturetags.tag";
 		$result = mysql_query($qry);
 		while($row = mysql_fetch_array($result)) {
-			$event['tags'][] = '<a href="/search/'.str_replace(" ","+",$row['tag']).'">'.$row['tag'].'</a>';
+			$event['tags'][] = '<a href="/search/'.str_replace(" ","_",$row['tag']).'">'.$row['tag'].'</a>';
 		}
 		@mysql_free_result($result);
 		$tagstring = implode(", ", $event['tags']);
@@ -107,7 +107,7 @@
 		$qry = "SELECT tags.tag FROM tags, lecturetags WHERE lecturetags.lecture = ".$event['id']." AND tags.id = lecturetags.tag";
 		$result = mysql_query($qry);
 		while($row = mysql_fetch_array($result)) {
-			$event['tags'][] = '<a href="/search/'.str_replace(" ","+",$row['tag']).'">'.$row['tag'].'</a>';
+			$event['tags'][] = '<a href="/search/'.str_replace(" ","_",$row['tag']).'">'.$row['tag'].'</a>';
 		}
 		@mysql_free_result($result);
 		$tagstring = implode(", ", $event['tags']);
