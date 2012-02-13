@@ -1,7 +1,7 @@
 <?php
 require_once('config/database-connect.php');
 
-$input = str_replace('_',' ',clean($_GET["query"]));
+$input = clean($_GET["query"]);
 
 if(!empty($input)){
 	$instqry = "SELECT id, name, address, city, state, zip FROM institutions WHERE ((name LIKE '%%$input%%') OR (address LIKE '%%$input%%') OR (city LIKE '%%$input%%') OR (zip='$input'))";
@@ -125,7 +125,7 @@ include('header.php');
 			$interests = mysql_query($userintqry);
 			echo('<span class="tags">');
 			while($interest = mysql_fetch_array($interests)) {
-				echo('<a href="/search/'.str_replace(" ","_",$interest['tag']).'">'.$interest['tag'].'</a> ');
+				echo('<a href="/search/'.str_replace(" ","+",$interest['tag']).'">'.$interest['tag'].'</a> ');
 			}
 			echo('</span>');
 			@mysql_free_result($interests);
@@ -202,7 +202,7 @@ include('header.php');
 			$papertags = mysql_query($papertagqry);
 			echo('<span class="tags">');
 			while($papertag = mysql_fetch_array($papertags)) {
-				echo('<a href="/search/'.str_replace(" ","_",$papertag['tag']).'">'.$papertag['tag'].'</a> ');
+				echo('<a href="/search/'.str_replace(" ","+",$papertag['tag']).'">'.$papertag['tag'].'</a> ');
 			}
 			echo('</span>');
 			@mysql_free_result($papertags);
@@ -238,7 +238,7 @@ include('header.php');
 			$talktags = mysql_query($talktagqry);
 			echo('<span class="tags">');
 			while($talktag = mysql_fetch_array($talktags)) {
-				echo('<a href="/search/'.str_replace(" ","_",$talktag['tag']).'">'.$talktag['tag'].'</a> ');
+				echo('<a href="/search/'.str_replace(" ","+",$talktag['tag']).'">'.$talktag['tag'].'</a> ');
 			}
 			echo('</span>');
 			@mysql_free_result($papertags);

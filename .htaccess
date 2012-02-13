@@ -8,7 +8,7 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule ^search\/?$ ./supersearch.php
-RewriteRule ^search/(\w+)\/?$ ./supersearch.php?query=$1
+RewriteRule ^search/([^/]+)$ ./supersearch.php?query=$1 [last]
 RewriteRule ^events\/?$ ./show-events.php
 
 RewriteRule ^(\w+)\/?$ ./profile.php?user=$1

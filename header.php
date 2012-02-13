@@ -64,7 +64,8 @@
 <head>
 
 <meta charset="utf-8" />
-<meta name="Description" content="LectureBank is a networking tool designed to connect researchers and event organizers in related scientific fields. Create and discover opportunities to speak and explore new talent for lectures, seminars, conferences, and symposia." />
+<meta name="description" content="LectureBank is a networking tool designed to connect researchers and event organizers in related scientific fields. Create and discover opportunities to speak and explore new talent for lectures, seminars, conferences, and symposia." />
+<?php if($keywords) echo('<meta name="keywords" content="'.$keywords.'" />'); ?>
 <meta name="google-site-verification" content="4wiL81U5wsXJ0uhXk-LK-EA0NE9sokF2T_ehY53R9Os" />
 <title><?php echo $title; ?> | LectureBank</title>
 <link rel="shortcut icon" href="/favicon.ico" />

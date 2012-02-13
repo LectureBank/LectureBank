@@ -48,7 +48,7 @@ if(($protected && $logged_in) || !$protected) {
 	$qry = "SELECT tags.id, tags.tag FROM tags, userinterests WHERE userinterests.uid = $uid && tags.id = userinterests.intid";
 	$result = mysql_query($qry);
 	while($row = mysql_fetch_array($result)) {
-		$interests[] = '<a href="/search/'.str_replace(" ","_",$row['tag']).'" rel="tag">'.$row['tag'].'</a>';
+		$interests[] = $row['tag'];
 	}
 	@mysql_free_result($result);
 	
@@ -96,6 +96,7 @@ if(($protected && $logged_in) || !$protected) {
 	} else {
 		$title = "My Profile";
 	}
+	$keywords = implode(",", $interests);
 	$profile = true;
     include('header.php');
 ?>
@@ -111,7 +112,10 @@ if(($protected && $logged_in) || !$protected) {
 </header>
 <br />
 <?php
-	$tagstring = implode(", ", $interests);
+	foreach ($interests as $interest) {
+		$tagstrings[] = '<a href="/search/'.str_replace(" ","+",$interest).'" rel="tag">'.$interest.'</a>';
+	}
+	$tagstring = implode(", ", $tagstrings);
 		if (!empty($tagstring)) {
 			echo($tagstring);
 		}

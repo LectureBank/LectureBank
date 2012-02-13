@@ -1,5 +1,5 @@
 <?php
-$input = str_replace('_',' ',clean($_GET["event"]));
+$input = clean($_GET["event"]);
 	
 	$qry = "SELECT lectures.title, lectures.date, lectures.eventname, lectures.abstract, lectures.link, institutions.name AS loc, users.name AS creator FROM lectures, institutions, users WHERE lectures.id='$input' AND users.id_user=lectures.creator AND institutions.id=lectures.loc_id";
 $result = mysql_query($qry);
