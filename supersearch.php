@@ -37,6 +37,7 @@ if(!empty($input)){
 	@mysql_free_result($lectureresult);
 	
 	$title = 'SuperSearch for "'.$input.'"';
+	$search = true;
 } else {
 	$title = "SuperSearch";
 }
@@ -257,6 +258,16 @@ include('header.php');
 		echo('<input type="submit" value="Search" />');
 		echo('</form><br />');
 	}
-	
+?>
+<script type="text/javascript">
+    $(document).ready(function() {
+ 
+        $(".searchabst").shorten({
+    		"showChars" : 250
+		});
+ 
+    });
+</script>
+<?php
 	include('footer.php');
 ?>

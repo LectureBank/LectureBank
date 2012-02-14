@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <ShortName>LectureBank Search</ShortName>
+   <Description>Use LectureBank.org to search for institutions, researchers, papers, and talks.</Description>
+   <Tags>lecture lecturebank institution school university college postdoc postdoctoral phd research study experiment science paper talk symposium colloquium seminar</Tags>
+   <Contact>admin@lecturebank.org</Contact>
+   <Url type="application/rss+xml"
+        template="http://www.lecturebank.org/searchrss.php?query={searchTerms}"/>
+   <Url type="text/html" 
+        template="http://www.lecturebank.org/search/{searchTerms}"/>
+   <LongName>LectureBank.org Site Search</LongName>
+   <Image height="114" width="114" type="image/png">http://www.lecturebank.org/apple-touch-icon.png</Image>
+   <Image height="16" width="16" type="image/vnd.microsoft.icon">http://www.lecturebank.org/favicon.ico</Image>
+   <Query role="example" searchTerms="Worcester" />
+   <Developer>LectureBank.org Development Team</Developer>
+   <SyndicationRight>open</SyndicationRight>
+   <AdultContent>false</AdultContent>
+   <Language>en-us</Language>
+   <OutputEncoding>UTF-8</OutputEncoding>
+   <InputEncoding>UTF-8</InputEncoding>
+ </OpenSearchDescription>

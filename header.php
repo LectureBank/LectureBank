@@ -61,16 +61,25 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<?php 
+if($search){
+	echo('<head profile="http://a9.com/-/spec/opensearch/1.1/">');
+} else {
+	echo('<head>');
+}
+?>
 
 <meta charset="utf-8" />
 <meta name="description" content="LectureBank is a networking tool designed to connect researchers and event organizers in related scientific fields. Create and discover opportunities to speak and explore new talent for lectures, seminars, conferences, and symposia." />
 <?php if($keywords) echo('<meta name="keywords" content="'.$keywords.'" />'); ?>
+<?php if($author) echo('<meta name="author" content="'.$author.'" />'); ?>
 <meta name="google-site-verification" content="4wiL81U5wsXJ0uhXk-LK-EA0NE9sokF2T_ehY53R9Os" />
 <title><?php echo $title; ?> | LectureBank</title>
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="stylesheet" href="/css/site.css" />
+<?php if($search) echo('<link rel="alternate" type="application/rss+xml" title="RSS" href="/searchrss.php?query='.$input.'">'); ?>
+<link rel="search" type="application/opensearchdescription+xml" href="/opensearchdescription.xml" title="LectureBank Site Search" />
 <link rel="P3Pv1" href="/w3c/p3p.xml">
 
 <!--[if lt IE 9]>
