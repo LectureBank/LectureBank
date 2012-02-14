@@ -107,7 +107,7 @@ $output = '<?xml version="1.0" encoding="UTF-8"?>
 				$output .= implode(',',$kwarr);
 			}
 			@mysql_free_result($papertags);
-			$output .= '</item>';
+			$output .= '</description></item>';
 		}
 		
 		foreach($lecturelist as $talk) {
@@ -131,7 +131,7 @@ $output = '<?xml version="1.0" encoding="UTF-8"?>
 				$output .= implode(',',$ttarr);
 			}
 			@mysql_free_result($papertags);
-			$output .= '</item>';
+			$output .= '</description></item>';
 		}
 		$output .= '</channel></rss>';
 		
