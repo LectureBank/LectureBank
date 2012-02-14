@@ -122,7 +122,7 @@ if($search){
   		<div id="skip">
 			<a href="#mainContent">Skip to Main Content</a>
 		</div>
- 		<a href="index.php"><img src="/images/lblogo_beta.png" width="504" height="144" alt="LectureBank, The Meta-Researcher" style="float:left;" /></a>
+ 		<a href="/index.php"><img src="/images/lblogo_beta.png" width="504" height="144" alt="LectureBank, The Meta-Researcher" style="float:left;" /></a>
 <div style="float: right;">
 <?php if($logged_in) {
 	include('loggedinpanel.php');
