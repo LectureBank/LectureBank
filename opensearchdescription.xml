@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-   <ShortName>LectureBank Search</ShortName>
+   <ShortName>LectureBank</ShortName>
    <Description>Use LectureBank.org to search for institutions, researchers, papers, and talks.</Description>
    <Tags>lecture lecturebank institution school university college postdoc postdoctoral phd research study experiment science paper talk symposium colloquium seminar</Tags>
    <Contact>admin@lecturebank.org</Contact>
