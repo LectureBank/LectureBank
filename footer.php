@@ -1,9 +1,9 @@
 <!-- end #mainContent --></div>
-  <footer style="height:55;position:relative;">
+  <footer>
     <a href="http://www.nsf.gov"><img src="/images/nsfbw.gif" height="45" style="position:absolute;top:5px;" /></a>
     <a href="http://www.wpi.edu"><img src="/images/wpibw.png" height="41" style="position:absolute;top:7px;right:5px;" /></a>
     <a href="/tos.php">Terms of Service</a> | <a href="/privacy.php">Privacy Policy</a> | <a href="mailto:admin@lecturebank.org">Contact Us</a><br />
-    <span style="font-size:x-small;color:#333333;">Made possible through the support of the <a href="http://www.nsf.gov" style="color:#333333">National Science Foundation</a> and <a href="http://www.wpi.edu" style="color:#333333">Worcester Polytechnic Institute</a>
+    <span class="supportedby">Made possible through the support of the <a href="http://www.nsf.gov">National Science Foundation</a> and <a href="http://www.wpi.edu">Worcester Polytechnic Institute</a>
     </div>
   </footer>
 <!-- end #container --></div>

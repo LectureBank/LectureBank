@@ -237,11 +237,20 @@ div.clear {
 	clear: both;
 }
 footer {
+	height: 55;
+	position: relative;
 	margin: 0;
 	padding: 10px;
 	background-color: #DDDDDD;
 	text-align: center;
+	font-size: small;
 }
+
+.supportedby, .supportedby a {
+	font-size: xx-small;
+	color: #333333;
+}
+
 #container #header #navbar h2 {
 	color: #FFF;
 	font-family: "Lucida Console", Monaco, monospace;
