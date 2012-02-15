@@ -250,6 +250,9 @@ footer {
 	font-size: xx-small;
 	color: #333333;
 	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+	line-height: 1;
 }
 
 #container #header #navbar h2 {
