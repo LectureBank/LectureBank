@@ -125,7 +125,7 @@ if(($protected && $logged_in) || !$protected) {
 <section>
 <header>
 <h3>Scheduled Talks</h3>
-<?php echo ($protected) ? '<div class="profileTool"><a href="addlecture.php"><img src="images/plus.png"></a></div>' : ""; ?>
+<?php echo ($protected) ? '<div class="profileTool"><a href="dolecture.php"><img alt="Add an item" src="images/plus.png"></a></div>' : ""; ?>
 </header>
 <?php
 	if (!empty($schedlist)) {
@@ -134,7 +134,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ("<header>");
 			echo (!empty($scheditem['link'])) ? '<a itemprop="url" href="'.$scheditem['link'].'"><span itemprop="name">'.$scheditem['title'].'</span></a>' : '<span itemprop="name">'.$scheditem['title'].'</span>';
 			echo ("</header>");
-			echo ($protected) ? '<div class="profileTool"><!--<a href="#"><img src="images/wrench.png"></a>--> <a href="/deletelecture.php?item='.$scheditem['id'].'"><img src="images/minus.png"></a></div>' : "";
+			echo ($protected) ? '<div class="profileTool"><a href="/dolecture.php?edit='.$scheditem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/dolecture.php?delete='.$scheditem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
 			echo ("<p class=\"profileSub\">");
 			echo (!empty($scheditem['name'])) ? '<span itemprop="superEvent" itemscope itemtype="http://schema.org/EducationEvent"><span itemprop="name">'.$scheditem['name'].'</span></span>' : "";
 			echo ((!empty($scheditem['name']) && !empty($scheditem['inst'])) || (!empty($scheditem['name']) && !empty($scheditem['humandate']))) ? ", " : "";
@@ -146,7 +146,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ("</article>");
 		}
 	} else {
-		echo ($protected) ? 'None yet! Why not <a href="addlecture.php">add one?</a>' : '<span style="color:#CCC;">None</span>';
+		echo ($protected) ? 'None yet! Why not <a href="dolecture.php">add one?</a>' : '<span style="color:#CCC;">None</span>';
 	}
 ?>
 </section>
@@ -154,7 +154,7 @@ if(($protected && $logged_in) || !$protected) {
 <section>
 <header>
 <h3>Previous Engagements</h3>
-<?php echo ($protected) ? '<div class="profileTool"><a href="addlecture.php"><img src="images/plus.png"></a></div>' : ""; ?>
+<?php echo ($protected) ? '<div class="profileTool"><a href="dolecture.php"><img alt="Add an item"  src="images/plus.png"></a></div>' : ""; ?>
 </header>
 <?php
 	if (!empty($prevlist)) {
@@ -163,7 +163,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ("<header>");
 			echo (!empty($previtem['link'])) ? '<a itemprop="url" href="'.$previtem['link'].'"><span itemprop="name">'.$previtem['title'].'</span></a>' : '<span itemprop="name">'.$previtem['title'].'</span>';
 			echo ("</header>");
-			echo ($protected) ? '<div class="profileTool"><!--<a href="#"><img src="images/wrench.png"></a>--> <a href="/deletelecture.php?item='.$previtem['id'].'"><img src="images/minus.png"></a></div>' : "";
+			echo ($protected) ? '<div class="profileTool"><a href="/dolecture.php?edit='.$previtem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/dolecture.php?delete='.$previtem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
 			echo ("<p class=\"profileSub\">");
 			echo (!empty($previtem['name'])) ? '<span itemprop="superEvent" itemscope itemtype="http://schema.org/EducationEvent"><span itemprop="name">'.$previtem['name'].'</span></span>' : "";
 			echo ((!empty($previtem['name']) && !empty($previtem['inst'])) || (!empty($previtem['name']) && !empty($previtem['humandate']))) ? ", " : "";
@@ -175,7 +175,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ("</article>");
 		}
 	} else {
-		echo ($protected) ? 'None yet! Why not <a href="addlecture.php">add one?</a>' : '<span style="color:#CCC;">None</span>';
+		echo ($protected) ? 'None yet! Why not <a href="dolecture.php">add one?</a>' : '<span style="color:#CCC;">None</span>';
 	}
 ?>
 </section>
