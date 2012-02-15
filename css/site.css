@@ -249,6 +249,7 @@ footer {
 .supportedby, .supportedby a {
 	font-size: xx-small;
 	color: #333333;
+	white-space: nowrap;
 }
 
 #container #header #navbar h2 {
