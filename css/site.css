@@ -236,6 +236,7 @@ p.profileAbst {
 div.clear {
 	clear: both;
 }
+
 footer {
 	height: 55;
 	position: relative;
@@ -246,9 +247,12 @@ footer {
 	font-size: small;
 }
 
+footer a {
+	color: #333333;
+}
+
 .supportedby, .supportedby a {
 	font-size: xx-small;
-	color: #333333;
 	white-space: nowrap;
 	padding: 0;
 	margin: 0;
