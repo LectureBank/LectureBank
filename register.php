@@ -135,7 +135,7 @@ The LectureBank.org Team";
 
 $mail = new PHPGMailer();
 $mail->Username = 'admin@lecturebank.org'; 
-$mail->Password = 'minoritynetworking';
+$mail->Password = 'Grow$T3M';
 $mail->From = 'admin@lecturebank.org'; 
 $mail->FromName = 'LectureBank Administrator';
 $mail->Subject = 'LectureBank.org Registration';
