@@ -29,16 +29,17 @@
 	} elseif (!empty($toedit) && !empty($uid)) {
 		$preqry = "SELECT * FROM lectures WHERE id=$toedit";
 		$preqryresult = mysql_query($preqry);
-		$prelect = mysql_fetch_array($preqryresult);
-		if($prelect && ($prelect['creator'] == $uid)) {
+		$checkprelect = mysql_fetch_array($preqryresult);
+		if($checkprelect && ($checkprelect['creator'] == $uid)) {
+			$prelect = $checkprelect;
 			$prelectid = $prelect['id'];
 			$preinstqry = "SELECT institutions.id, institutions.name FROM institutions WHERE institutions.id = ".$prelect['loc_id'];
 			$preinstresult = mysql_query($preinstqry);
 			$preinst = mysql_fetch_array($preinstresult);
-			if($preinst) {
+			if(!empty($preinst)) {
 				$preinstjson  = json_encode($preinst);
 			}
-			@mysql_free_result($result);
+			@mysql_free_result($preinstresult);
 			
 			$pretagqry = "SELECT tags.id, tags.tag FROM tags, lecturetags WHERE lecturetags.lecture = $toedit && tags.id = lecturetags.tag";
 			$pretagresults = mysql_query($pretagqry);
@@ -56,19 +57,15 @@
 			@mysql_free_result($pretagresults);
 			$title = "Edit Lecture";
 		} else {
-			$errflag = true;
 			$errors = true;
 			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You do not have permission to edit this record.</font>';
 		}
-		@mysql_free_result($prelect);
+		@mysql_free_result($checkprelect);
 		
 	} elseif ($_POST['form_submitted'] && !empty($uid)) {
 		
-		//Validation error flag
-		$errflag = false;
-		
 		//Sanitize the POST values
-		$title = clean($_POST["title"]);
+		$posttitle = clean($_POST["title"]);
 		$eventname = clean($_POST["eventname"]);
 		$location = trim(clean($_POST["location"]),",");
 		$abstract = clean($_POST["abstract"]);
@@ -88,8 +85,9 @@
 			$permitresult = mysql_fetch_array($permitresult);
 			if($permitresult && ($permitresult['creator'] == $uid)) {
 				$upok = true;
+				$title = "Edit Lecture";
+				$prelectid = "$uprec";
 			} else {
-				$errflag = true;
 				$errors = true;
 				$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You do not have permission to edit this record.</font>';
 				break 3;
@@ -97,6 +95,10 @@
 			@mysql_free_result($permitresult);
 		}
 		
+		if(empty($posttitle)){
+			$errors = true;
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You must enter a title.</font>';
+		}
 		if(!empty($date) && !empty($starttime)) {
 			$start = date("Y-m-d H:i:00", mktime(date("H", strtotime($starttime)),date("i", strtotime($starttime)),00,date("m", strtotime($date)),date("d", strtotime($date)),date("Y", strtotime($date))));
 		} else {
@@ -121,7 +123,7 @@
 		
 		$values = "$uid,";
 		
-		!empty($title) ? ($values .= "'$title',") : ($values .= "NULL,") ;
+		!empty($posttitle) ? ($values .= "'$posttitle',") : ($values .= "NULL,") ;
 		!empty($eventname) ? ($values .= "'$eventname',") : ($values .= "NULL,") ;
 		!empty($location) ? ($values .= "'$location',") : ($values .= "NULL,") ;
 		!empty($abstract) ? ($values .= "'$abstract',") : ($values .= "NULL,") ;
@@ -165,6 +167,45 @@
 			}
 		
 			header("Location: profile.php");
+		} elseif(!empty($location) || !empty($taginput)) {
+			if(!empty($location)) {
+				$postinstqry = "SELECT institutions.id, institutions.name FROM institutions WHERE institutions.id = ".$location;
+				$postinstresult = mysql_query($postinstqry);
+				$postinstcheck = mysql_fetch_array($postinstresult);
+				if(!empty($postinstcheck)) {
+					$postinst = array();
+					$postinst[id] = $postinstcheck[id];
+					$postinst[name] = $postinstcheck[name];
+					$postinstjson  = json_encode($postinst);
+					echo($postinstjson);
+				}
+				@mysql_free_result($postinstresult);
+			}
+			
+			if(!empty($taginput)) {
+				$posttags = array();
+				foreach($tagarray as $posttag) {
+					$posttagqry = "SELECT tags.id, tags.tag FROM tags WHERE tags.id = $posttag";
+					$posttagresult = mysql_query($posttagqry);
+					$posttagcheck = mysql_fetch_array($posttagresult);
+					if(!empty($posttagcheck)) {
+						$posttagentry = array();
+						$posttagentry[id] = intval($posttagcheck[id]);
+						$posttagentry[name] = $posttagcheck[tag];
+						$posttags[] = $posttagentry;
+					} else {
+						$posttagentry = array();
+						$posttagentry[id] = $posttag;
+						$posttagentry[name] = $posttag;
+						$posttags[] = $posttagentry;
+					}
+					@mysql_free_result($posttagresult);
+				}
+				
+				if (!empty($posttags)) {
+					$posttagjson = json_encode($posttags);
+				}
+			}
 		}
 	}
 	
@@ -194,17 +235,19 @@
 <form id="lecture" action="dolecture.php" enctype="multipart/form-data" method="post">
   <fieldset>
     <label for="title" onmouseover="tooltip.show('<span class=\'tiptext\'>a descriptive name or title for this entry<br /><br />140 characters or less, please. keep it tweetable!</span>');" onmouseout="tooltip.hide();">Title</label>
-    <input type="text" id="title" name="title" size="60" style="width:320px;" <?php if(!empty($prelect['title'])) echo('value="'.$prelect['title'].'"') ?> required />
+    <input type="text" id="title" name="title" size="60" style="width:320px;" <?php if(!empty($prelect['title'])) {echo('value="'.$prelect['title'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$posttitle.'"');} ?> required />
     <label for="date" onmouseover="tooltip.show('<span class=\'tiptext\'>the date of the event you spoke at<br />self explanatory..?<br /><br />required</span>');" onmouseout="tooltip.hide();">Date</label>
-    <input type="date" id="date" name="date" size="15" <?php if(!empty($prelect['start'])) echo('value="'.date('m/d/Y',strtotime($prelect['start'])).'"');?> required />
+    <input type="date" id="date" name="date" size="15" <?php if(!empty($prelect['start'])) {echo('value="'.date('m/d/Y',strtotime($prelect['start'])).'"');} elseif($_POST['form_submitted']) {echo('value="'.$date.'"');} ?> required />
     <script type="text/javascript">
 	var i = document.createElement("input");
 	i.setAttribute("type", "date");
 	if(i.type == "text"){    
         var opts = {
 			formElements:{"date":"m-sl-d-sl-Y"}
-			<?php if(!empty($prelect['start'])) echo(',
-			cursorDate:"'.date('Ymd',strtotime($prelect['start'])).'"');?>
+			<?php if(!empty($prelect['start'])) {echo(',
+			cursorDate:"'.date('Ymd',strtotime($prelect['start'])).'"');}
+			elseif($_POST['form_submitted'] && !empty($date)) {echo(',
+			cursorDate:"'.date('Ymd',strtotime($date)).'"');}?>
 		};
 		datePickerController.createDatePicker(opts);
 	}
@@ -218,9 +261,11 @@
 	
 	for ($i = $tm_start; $i <= $tm_end; $i += 1800) {
 		if(!empty($prelect['start'])) {
-			echo ($i == strtotime(date('H:i',strtotime($prelect['start']))) ? '<option selected value="$i">' : '<option value ="$i">') . date('H:i', $i) . '</option>';
+			echo ($i == strtotime(date('H:i',strtotime($prelect['start']))) ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
+		} elseif($_POST['form_submitted'] && !empty($start)) {
+			echo ($i == strtotime(date('H:i',strtotime($start))) ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
 		} else {
-			echo ($i == strtotime('12:00') ? '<option selected value="$i">' : '<option value ="$i">') . date('H:i', $i) . '</option>';
+			echo ($i == strtotime('12:00') ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
 		}
 	}
 	?>
@@ -234,22 +279,26 @@
 	
 	for ($i = $tm_start; $i <= $tm_end; $i += 1800) {
 		if(!empty($prelect['end'])) {
-			echo ($i == strtotime(date('H:i',strtotime($prelect['end']))) ? '<option selected value="$i">' : '<option value ="$i">') . date('H:i', $i) . '</option>';
+			echo ($i == strtotime(date('H:i',strtotime($prelect['end']))) ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
+		} elseif($_POST['form_submitted'] && !empty($end)) {
+			echo ($i == strtotime(date('H:i',strtotime($end))) ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
 		} else {
-			echo '<option value ="$i">' . date('H:i', $i) . '</option>';
+			echo '<option value ="'.date('H:i',$i).'">' . date('H:i', $i) . '</option>';
 		}
 	}
 	
-    if(empty($prelect['end'])) echo('<option selected />');
+    if(empty($prelect['end']) && empty($endtime)) echo('<option selected />');
     
 	$tm_start = strtotime('12:30');
 	$tm_end = strtotime('23:30');
 	
 	for ($i = $tm_start; $i <= $tm_end; $i += 1800) {
 		if(!empty($prelect['end'])) {
-			echo ($i == strtotime(date('H:i',strtotime($prelect['end']))) ? '<option selected value="$i">' : '<option value ="$i">') . date('H:i', $i) . '</option>';
+			echo ($i == strtotime(date('H:i',strtotime($prelect['end']))) ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
+		} elseif($_POST['form_submitted'] && !empty($end)) {
+			echo ($i == strtotime(date('H:i',strtotime($end))) ? '<option selected value="'.date('H:i',$i).'">' : '<option value ="'.date('H:i',$i).'">') . date('H:i', $i) . '</option>';
 		} else {
-			echo '<option value ="$i">' . date('H:i', $i) . '</option>';
+			echo '<option value ="'.date('H:i',$i).'">' . date('H:i', $i) . '</option>';
 		}
 	}
 	?>
@@ -271,8 +320,8 @@
 		t1.setAttribute("id", "starttime");
 		t2.setAttribute("name", "endtime");
 		t2.setAttribute("id", "endtime");
-		<?php if(!empty($prelect['start'])) echo('t1.setAttribute("value", "'.date('H:i',strtotime($prelect['start'])).'");'); ?>
-		<?php if(!empty($prelect['end'])) echo('t2.setAttribute("value", "'.date('H:i',strtotime($prelect['end'])).'");'); ?>
+		<?php if(!empty($prelect['start'])) {echo('t1.setAttribute("value", "'.date('H:i',strtotime($prelect['start'])).'");');} elseif($_POST['form_submitted'] && !empty($starttime)) {echo('t1.setAttribute("value", "'.date('H:i',strtotime($starttime)).'");');} ?>
+		<?php if(!empty($prelect['end'])) {echo('t2.setAttribute("value", "'.date('H:i',strtotime($prelect['end'])).'");');} elseif($_POST['form_submitted'] && !empty($endtime)) {echo('t2.setAttribute("value", "'.date('H:i',strtotime($endtime)).'");');} ?>
 		e1.parentNode.replaceChild(t1,e1);
 		e2.parentNode.replaceChild(t2,e2);
 	}
@@ -280,7 +329,7 @@
     <br />
     <br />
     <label for="locdetail" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>address or building/floor/room, etc.<br /><br />not required</span>');" onmouseout="tooltip.hide();">Where</label>
-    <textarea id="locdetail" class="twocol" name="locdetail" rows="3" cols="60"><?php if(!empty($prelect['locdetail'])) echo($prelect['locdetail']) ?></textarea>
+    <textarea id="locdetail" class="twocol" name="locdetail" rows="3" cols="60"><?php if(!empty($prelect['locdetail'])) {echo($prelect['locdetail']);} elseif($_POST['form_submitted']) {echo($locdetail);} ?></textarea>
 <br />
 <br />
     <label for="location" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>what institution or organization did you speak at?<br />start typing and we\'ll make some suggestions<br /><br />required</span>');" onmouseout="tooltip.hide();">Sponsor</label>
@@ -292,8 +341,10 @@
 				hintText: "Start typing the name of an institution",
                 tokenLimit: 1,
 				preventDuplicates: true
-				<?php if (isset($preinst)) echo(",
-				prePopulate: [$preinstjson]") ?>
+				<?php if (isset($preinst)) {echo(",
+				prePopulate: [$preinstjson]");} 
+				elseif ($_POST['form_submitted'] && !empty($postinstjson)) {echo(",
+				prePopulate: [$postinstjson]");} ?>
             });
         });
         </script>
@@ -301,16 +352,16 @@
     <br />
     <br />
     <label for="name" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>what conference or series was your talk a part of?<br /><br />not required</span>');" onmouseout="tooltip.hide();">Event</label>
-    <input type="text" id="eventname" class="twocol" name="eventname" <?php if(!empty($prelect['eventname'])) echo('value="'.$prelect['eventname'].'"') ?> size="60" />
+    <input type="text" id="eventname" class="twocol" name="eventname" <?php if(!empty($prelect['eventname'])) {echo('value="'.$prelect['eventname'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$eventname.'"');}  ?> size="60" />
     <br />
     <br />
 <label for="link" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>a link to more information about this event<br /><br />not required, no spam please</span>');" onmouseout="tooltip.hide();">Link</label>
-<input type="url" id="link" class="twocol" name="link" <?php if(!empty($prelect['link'])) echo('value="'.$prelect['link'].'"') ?> size="60" />
+<input type="url" id="link" class="twocol" name="link" <?php if(!empty($prelect['link'])) {echo('value="'.$prelect['link'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$link.'"');}  ?> size="60" />
     <br />
     <br />
     <label for="abstract" onmouseover="tooltip.show('<span class=\'tiptext\'>100-500 words describing the project in abstract<br />focus on the aspects you could give a talk about<br />maybe interesting findings or innovative bits about your methodology?<br /><br />not required, but highly recommended</span>');" onmouseout="tooltip.hide();" style="text-align:center;">Abstract or Description</label>
     <br />
-    <textarea id="abstract" name="abstract" rows="5" cols="60" style="margin:auto;"><?php if(!empty($prelect['abstract'])) echo($prelect['abstract']) ?></textarea>
+    <textarea id="abstract" name="abstract" rows="5" cols="60" style="margin:auto;"><?php if(!empty($prelect['abstract'])) {echo($prelect['abstract']);} elseif($_POST['form_submitted']) {echo($abstract);}  ?></textarea>
     <br />
     <br />
     <label for="tags" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>some key words to describe your lecture<br /><br />be specific! add as many as you like<br />start typing and we\'ll make some suggestions</span>');" onmouseout="tooltip.hide();"><div class="taglabel">Tags<br /><small>Keywords</small></div></label>
@@ -321,8 +372,10 @@
 				hintText: "Start typing some keywords",
 				preventDuplicates: true,
 				theme: "facebook"
-				<?php if (isset($pretagjson)) echo(",
-				prePopulate: $pretagjson") ?>
+				<?php if (isset($pretagjson)) {echo(",
+				prePopulate: $pretagjson");} 
+				elseif ($_POST['form_submitted'] && !empty($posttagjson)) {echo(",
+				prePopulate: $posttagjson");} ?>
             });
         });
 </script>
@@ -389,8 +442,8 @@ calculate_time_zone();
 	<?php if(!empty($prelectid)) echo('<input type="hidden" name="record_to_update" value="'.$prelectid.'" />'); ?>
     <br />
     <br />
-    </fieldset>
     <input type="submit" value="<?php echo (!empty($prelectid)) ? 'Update' : 'Add' ;?>" />
+    <a style="text-decoration:none" href="/profile.php"><input type="button" name="cancel" value="Cancel" /></a>
   </fieldset>
 </form>
 

@@ -183,7 +183,7 @@ if(($protected && $logged_in) || !$protected) {
 <section>
 <header>
 <h3>Research/Publications</h3>
-<?php echo ($protected) ? '<div class="profileTool"><a href="addresearch.php"><img src="images/plus.png"></a></div>' : ""; ?>
+<?php echo ($protected) ? '<div class="profileTool"><a href="doresearch.php"><img alt="Add an item" src="images/plus.png"></a></div>' : ""; ?>
 </header>
 <?php
 	if (!empty($reslist)) {
@@ -193,12 +193,12 @@ if(($protected && $logged_in) || !$protected) {
 			echo (!empty($resitem['link'])) ? '<a itemprop="url" href="'.$resitem['link'].'"><span itemprop="name">'.$resitem['title'].'</span></a>' : '<span itemprop="name">'.$resitem['title'].'</span>';
 			echo (!empty($resitem['year'])) ? ' (<span itemprop="datePublished">'.$resitem['year'].'</span>)' : "";
 			echo ("</header>");
-			echo ($protected) ? '<div class="profileTool"><!--<a href="#"><img src="images/wrench.png"></a>--> <a href="/deleteresearch.php?item='.$resitem['id'].'"><img src="images/minus.png"></a></div>' : "";
+			echo ($protected) ? '<div class="profileTool"><a href="/doresearch.php?edit='.$resitem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/doresearch.php?delete='.$resitem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
 			echo (!empty($resitem['abst'])) ? '<p itemprop="description" id="abst'.$resitem['id'].'" class="profileAbst">'.$resitem['abst'].'</p>' : "";
 			echo ("</article>");
 		}
 	} else {
-		echo ($protected) ? 'None yet! Why not <a href="addresearch.php">add one?</a>' : '<span style="color:#CCC;">None</span>';
+		echo ($protected) ? 'None yet! Why not <a href="doresearch.php">add one?</a>' : '<span style="color:#CCC;">None</span>';
 	}
 ?>
 <script type="text/javascript">
