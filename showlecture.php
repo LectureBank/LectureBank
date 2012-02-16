@@ -55,7 +55,6 @@
 		if(!empty($lecture['abst'])){
 			$metadescription = $lecture['abst'];
 		}
-		$googlemap = true;
 		include('header.php');
 		
 		echo ('<article itemscope itemtype="http://schema.org/EducationEvent">');
@@ -78,9 +77,11 @@
 		if(!empty($lecture['link'])) echo ('<a itemprop="url" href="'.$lecture['link'].'" target="_blank">'.$lecture['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
 		echo('<span class="tags">');
 		foreach($lecturetags as $tag) {
-			echo('<a href="/search/'.str_replace(" ","+",$tag).'">'.$tag.'</a> ');
+			echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
 		}
-		echo('</span><br /><a href="/calendarevent.php?event='.$lectureid.'"><img alt="Download iCal" src="/images/icalbutton.gif"></a>');
+		echo('</span><br />');
+		echo('<div class="g-plusone" data-size="small" data-href="http://www.lecturebank.org/'.$lecture['username'].'/talks/'.cleanSlug($lecture['title']).'"></div>');
+		echo('<a href="/calendarevent.php?event='.$lectureid.'"><img alt="Download iCal" src="/images/icalbutton.gif"></a>');
 		echo('<script type="text/javascript">
 		function initialize() {
 		var myLatLng = new google.maps.LatLng('.$lecture['lat'].', '.$lecture['lon'].');

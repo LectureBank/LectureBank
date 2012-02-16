@@ -113,15 +113,16 @@ if(($protected && $logged_in) || !$protected) {
 <?php echo('<a href="mailto:'.$email.'" itemprop="email">'.$email.'</a>'); ?>, <?php echo (!empty($zip)) ? '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="postalCode">'.$zip.'</span></span>' : "No ZIP entered"; ?>
 </header>
 <br />
-<span class="tags" style="font-size:small">
+<span class="tags" style="font-size:small;">
 <?php
 	foreach ($interests as $interest) {
 		echo('<a href="/search/'.str_replace(" ","+",$interest).'" rel="tag">'.$interest.'</a> ');
 	}
 ?>
 </span>
-<div class="clear">
+<div class="clear" style="height:10px;">
 </div>
+<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="180" data-href="http://www.lecturebank.org/<?php echo($username) ?>"></div>
 </section>
 <section>
 <header>
@@ -134,6 +135,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ('<article itemscope itemtype="http://schema.org/EducationEvent">');
 			echo ("<header>");
 			echo ('<a itemprop="url" href="/'.$username.'/talks/'.cleanSlug($scheditem['title']).'"><span itemprop="name">'.$scheditem['title'].'</span></a>');
+			echo (' <div class="g-plusone" data-size="small" data-annotation="none" data-href="http://www.lecturebank.org/'.$username.'/talks/'.cleanSlug($scheditem['title']).'"></div>');
 			if(!empty($scheditem['link'])) echo (' <a itemprop="url" href="'.$scheditem['link'].'" target="_blank"><img alt="External link" src="/images/external-link-icon.gif"></a>');
 			echo ("</header>");
 			echo ($protected) ? '<div class="profileTool"><a href="/dolecture.php?edit='.$scheditem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/dolecture.php?delete='.$scheditem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
@@ -164,6 +166,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ('<article itemscope itemtype="http://schema.org/EducationEvent">');
 			echo ("<header>");
 			echo ('<a itemprop="url" href="/'.$username.'/talks/'.cleanSlug($previtem['title']).'"><span itemprop="name">'.$previtem['title'].'</span></a>');
+			echo (' <div class="g-plusone" data-size="small" data-annotation="none" data-href="http://www.lecturebank.org/'.$username.'/talks/'.cleanSlug($previtem['title']).'"></div>');
 			if(!empty($previtem['link'])) echo (' <a itemprop="url" href="'.$previtem['link'].'" target="_blank"><img alt="External link" src="/images/external-link-icon.gif"></a>');
 			echo ("</header>");
 			echo ($protected) ? '<div class="profileTool"><a href="/dolecture.php?edit='.$previtem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/dolecture.php?delete='.$previtem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
@@ -195,6 +198,7 @@ if(($protected && $logged_in) || !$protected) {
 			echo ("<header>");
 			echo ('<a itemprop="url" href="/'.$username.'/research/'.cleanSlug($resitem['title']).'"><span itemprop="name">'.$resitem['title'].'</span></a>');
 			echo (!empty($resitem['year'])) ? ' (<span itemprop="datePublished">'.$resitem['year'].'</span>)' : "";
+			echo (' <div class="g-plusone" data-size="small" data-annotation="none" data-href="http://www.lecturebank.org/'.$username.'/research/'.cleanSlug($resitem['title']).'"></div>');
 			if(!empty($resitem['link'])) echo (' <a itemprop="url" href="'.$resitem['link'].'" target="_blank"><img alt="External link" src="/images/external-link-icon.gif"></a>');
 			echo ("</header>");
 			echo ($protected) ? '<div class="profileTool"><a href="/doresearch.php?edit='.$resitem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/doresearch.php?delete='.$resitem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";

@@ -102,6 +102,7 @@ if($search){
 <?php if($tokeninput) include('includes/tokeninputscripts.php'); ?>
 <?php if($profile) include('includes/profilescripts.php'); ?>
 <?php if($protect_flag) include('includes/popoverscripts.php'); ?>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];

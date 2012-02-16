@@ -61,9 +61,10 @@
 		if(!empty($paper['link'])) echo ('<a itemprop="url" href="'.$paper['link'].'" target="_blank">'.$paper['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
 		echo('<span class="tags" itemprop="keywords">');
 		foreach($papertags as $tag) {
-			echo('<a href="/search/'.str_replace(" ","+",$tag).'">'.$tag.'</a> ');
+			echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
 		}
-		echo('</span>');
+		echo('</span><br />');
+		echo('<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="180" data-href="http://www.lecturebank.org/'.$lecture['username'].'/talks/'.cleanSlug($lecture['title']).'"></div>');
 		echo ("</article>");
 		
 	}
