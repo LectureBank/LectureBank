@@ -235,9 +235,9 @@
 <form id="lecture" action="dolecture.php" enctype="multipart/form-data" method="post">
   <fieldset>
     <label for="title" onmouseover="tooltip.show('<span class=\'tiptext\'>a descriptive name or title for this entry<br /><br />140 characters or less, please. keep it tweetable!</span>');" onmouseout="tooltip.hide();">Title</label>
-    <input type="text" id="title" name="title" size="60" style="width:320px;" <?php if(!empty($prelect['title'])) {echo('value="'.$prelect['title'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$posttitle.'"');} ?> required />
+    <input type="text" id="title" name="title" size="60" style="width:320px;" <?php if(!empty($prelect['title'])) {echo('value="'.$prelect['title'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($posttitle).'"');} ?> required />
     <label for="date" onmouseover="tooltip.show('<span class=\'tiptext\'>the date of the event you spoke at<br />self explanatory..?<br /><br />required</span>');" onmouseout="tooltip.hide();">Date</label>
-    <input type="date" id="date" name="date" size="15" <?php if(!empty($prelect['start'])) {echo('value="'.date('m/d/Y',strtotime($prelect['start'])).'"');} elseif($_POST['form_submitted']) {echo('value="'.$date.'"');} ?> required />
+    <input type="date" id="date" name="date" size="15" <?php if(!empty($prelect['start'])) {echo('value="'.date('m/d/Y',strtotime($prelect['start'])).'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($date).'"');} ?> required />
     <script type="text/javascript">
 	var i = document.createElement("input");
 	i.setAttribute("type", "date");
@@ -329,7 +329,7 @@
     <br />
     <br />
     <label for="locdetail" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>address or building/floor/room, etc.<br /><br />not required</span>');" onmouseout="tooltip.hide();">Where</label>
-    <textarea id="locdetail" class="twocol" name="locdetail" rows="3" cols="60"><?php if(!empty($prelect['locdetail'])) {echo($prelect['locdetail']);} elseif($_POST['form_submitted']) {echo($locdetail);} ?></textarea>
+    <textarea id="locdetail" class="twocol" name="locdetail" rows="3" cols="60"><?php if(!empty($prelect['locdetail'])) {echo($prelect['locdetail']);} elseif($_POST['form_submitted']) {echo(stripcslashes($locdetail));} ?></textarea>
 <br />
 <br />
     <label for="location" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>what institution or organization did you speak at?<br />start typing and we\'ll make some suggestions<br /><br />required</span>');" onmouseout="tooltip.hide();">Sponsor</label>
@@ -352,16 +352,16 @@
     <br />
     <br />
     <label for="name" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>what conference or series was your talk a part of?<br /><br />not required</span>');" onmouseout="tooltip.hide();">Event</label>
-    <input type="text" id="eventname" class="twocol" name="eventname" <?php if(!empty($prelect['eventname'])) {echo('value="'.$prelect['eventname'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$eventname.'"');}  ?> size="60" />
+    <input type="text" id="eventname" class="twocol" name="eventname" <?php if(!empty($prelect['eventname'])) {echo('value="'.$prelect['eventname'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($eventname).'"');}  ?> size="60" />
     <br />
     <br />
 <label for="link" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>a link to more information about this event<br /><br />not required, no spam please</span>');" onmouseout="tooltip.hide();">Link</label>
-<input type="url" id="link" class="twocol" name="link" <?php if(!empty($prelect['link'])) {echo('value="'.$prelect['link'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$link.'"');}  ?> size="60" />
+<input type="url" id="link" class="twocol" name="link" <?php if(!empty($prelect['link'])) {echo('value="'.$prelect['link'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($link).'"');}  ?> size="60" />
     <br />
     <br />
     <label for="abstract" onmouseover="tooltip.show('<span class=\'tiptext\'>100-500 words describing the project in abstract<br />focus on the aspects you could give a talk about<br />maybe interesting findings or innovative bits about your methodology?<br /><br />not required, but highly recommended</span>');" onmouseout="tooltip.hide();" style="text-align:center;">Abstract or Description</label>
     <br />
-    <textarea id="abstract" name="abstract" rows="5" cols="60" style="margin:auto;"><?php if(!empty($prelect['abstract'])) {echo($prelect['abstract']);} elseif($_POST['form_submitted']) {echo($abstract);}  ?></textarea>
+    <textarea id="abstract" name="abstract" rows="5" cols="60" style="margin:auto;"><?php if(!empty($prelect['abstract'])) {echo($prelect['abstract']);} elseif($_POST['form_submitted']) {echo(stripcslashes($abstract));}  ?></textarea>
     <br />
     <br />
     <label for="tags" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>some key words to describe your lecture<br /><br />be specific! add as many as you like<br />start typing and we\'ll make some suggestions</span>');" onmouseout="tooltip.hide();"><div class="taglabel">Tags<br /><small>Keywords</small></div></label>

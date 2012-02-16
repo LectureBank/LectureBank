@@ -226,9 +226,9 @@
 <form id="research" action="doresearch.php" enctype="multipart/form-data" method="post">
 <fieldset>
 <label for="title" onmouseover="tooltip.show('<span class=\'tiptext\'>a descriptive name or title for this entry<br /><br />140 characters or less, please. keep it tweetable!</span>');" onmouseout="tooltip.hide();">Title</label>
-<input type="text" id="title" name="title" size="60" <?php if(!empty($prepaper['title'])) {echo('value="'.$prepaper['title'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$posttitle.'"');}?> style="width:320px;" required />
+<input type="text" id="title" name="title" size="60" <?php if(!empty($prepaper['title'])) {echo('value="'.$prepaper['title'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($posttitle).'"');}?> style="width:320px;" required />
 <label for="year" onmouseover="tooltip.show('<span class=\'tiptext\'>the year you published or completed your research<br /><br />not required</span>');" onmouseout="tooltip.hide();">Year</label>
-<input type="text" id="year" name="year" <?php if(!empty($prepaper['yr'])) {echo('value="'.$prepaper['yr'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$year.'"');} ?> size="15" />
+<input type="text" id="year" name="year" <?php if(!empty($prepaper['yr'])) {echo('value="'.$prepaper['yr'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($year).'"');} ?> size="15" />
 <br />
 <?php 
 if(!empty($prepaper['journal']) || !empty($prepaper['volume']) || !empty($prepaper['issue']) || !empty($prepaper['startpg']) || !empty($prepaper['endpg']) || !empty($prepaper['doi']) || !empty($journal) || !empty($volume) || !empty($issue) || !empty($startpg) || !empty($endpg) || !empty($doi)) {
@@ -240,22 +240,22 @@ if(!empty($prepaper['journal']) || !empty($prepaper['volume']) || !empty($prepap
 }
 ?>
 <label for="journal" class="twocol">Journal</label>
-<input type="text" id="journal" class="twocol" name="journal" <?php if(!empty($prepaper['journal'])) {echo('value="'.$prepaper['journal'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$journal.'"');}?> size="60" />
+<input type="text" id="journal" class="twocol" name="journal" <?php if(!empty($prepaper['journal'])) {echo('value="'.$prepaper['journal'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($journal).'"');}?> size="60" />
 <br /><br />
 <label for="volume" class="twocol">Volume</label>
 <span class="twocol" style="background:inherit;">
-<input type="number" id="volume" name="volume" min="1" max="99999" size="4" <?php if(!empty($prepaper['volume'])) {echo('value="'.$prepaper['volume'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$volume.'"');} ?> style="width:45px" />
+<input type="number" id="volume" name="volume" min="1" max="99999" size="4" <?php if(!empty($prepaper['volume'])) {echo('value="'.$prepaper['volume'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($volume).'"');} ?> style="width:45px" />
 <label for="issue">Issue</label>
-<input type="number" id="issue" name="issue" min="1" max="99999" size="3" <?php if(!empty($prepaper['issue'])) {echo('value="'.$prepaper['issue'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$issue.'"');} ?> style="width:40px;" />
+<input type="number" id="issue" name="issue" min="1" max="99999" size="3" <?php if(!empty($prepaper['issue'])) {echo('value="'.$prepaper['issue'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($issue).'"');} ?> style="width:40px;" />
 &emsp;
 <label for="startpg">Pages</label>
-<input type="number" id="startpg" name="startpg" min="1" max="99999" size="4" <?php if(!empty($prepaper['startpg'])) {echo('value="'.$prepaper['startpg'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$startpg.'"');} ?> style="width:45px;" />
+<input type="number" id="startpg" name="startpg" min="1" max="99999" size="4" <?php if(!empty($prepaper['startpg'])) {echo('value="'.$prepaper['startpg'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($startpg).'"');} ?> style="width:45px;" />
 <label for="endpg">to</label>
-<input type="number" id="endpg" name="endpg" min="1" max="99999" size="4" <?php if(!empty($prepaper['endpg'])) {echo('value="'.$prepaper['endpg'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$endpg.'"');} ?> style="width:45px;" />
+<input type="number" id="endpg" name="endpg" min="1" max="99999" size="4" <?php if(!empty($prepaper['endpg'])) {echo('value="'.$prepaper['endpg'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($endpg).'"');} ?> style="width:45px;" />
 </span>
 <br /><br />
 <label for="doi" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>digital object identifier, if you were provided one<br /><br />click for more information</span>');" onmouseout="tooltip.hide();"><a href="http://www.doi.org" style="text-decoration:none; color:black;">DOI</a></label>
-<input type="url" id="doi" class="twocol" name="doi" <?php if(!empty($prepaper['doi'])) {echo('value="'.$prepaper['doi'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$doi.'"');} ?> size="60" />
+<input type="url" id="doi" class="twocol" name="doi" <?php if(!empty($prepaper['doi'])) {echo('value="'.$prepaper['doi'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($doi).'"');} ?> size="60" />
 <br />
 </div>
 <br />
@@ -263,11 +263,11 @@ if(!empty($prepaper['journal']) || !empty($prepaper['volume']) || !empty($prepap
 <input type="text" id="collab" class="twocol" name="collab" size="60" />
 <br /><br />
 <label for="link" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>a link to more information about this project<br />maybe a website or a PDF version of the paper?<br /><br />not required, no spam please</span>');" onmouseout="tooltip.hide();">Link</label>
-<input type="url" id="link" class="twocol" name="link" <?php if(!empty($prepaper['link'])) {echo('value="'.$prepaper['link'].'"');} elseif($_POST['form_submitted']) {echo('value="'.$link.'"');} ?> size="60" />
+<input type="url" id="link" class="twocol" name="link" <?php if(!empty($prepaper['link'])) {echo('value="'.$prepaper['link'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($link).'"');} ?> size="60" />
 <br /><br />
 <label for="abstract"  onmouseover="tooltip.show('<span class=\'tiptext\'>100-500 words describing the project in abstract<br />focus on the aspects you could give a talk about<br />maybe interesting findings or innovative bits about your methodology?<br /><br />not required, but highly recommended</span>');" onmouseout="tooltip.hide();" style="text-align:center;">Abstract or Description</label>
 <br />
-<textarea id="abstract" name="abstract" rows="5" cols="60" style="margin:auto;"><?php if(!empty($prepaper['abstract'])) {echo($prepaper['abstract']);} elseif($_POST['form_submitted']) {echo($abstract);} ?></textarea>
+<textarea id="abstract" name="abstract" rows="5" cols="60" style="margin:auto;"><?php if(!empty($prepaper['abstract'])) {echo($prepaper['abstract']);} elseif($_POST['form_submitted']) {echo(stripcslashes($abstract));} ?></textarea>
 <br /><br />
     <label for="tags" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>some key words to describe your research<br /><br />be specific! add as many as you like<br />start typing and we\'ll make some suggestions</span>');" onmouseout="tooltip.hide();"><div class="taglabel">Tags<br /><small>Keywords</small></div></label>
 <input type="text" class="twocol" id="tags" name="tags" size="60" />
