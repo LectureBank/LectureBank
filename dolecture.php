@@ -21,6 +21,8 @@
 			@mysql_free_result($result);
 			$qry = "DELETE FROM lectures WHERE id='$todelete'";
 			mysql_query($qry);
+			$qry = "DELETE FROM lecturetags WHERE lecture='$todelete'";
+			mysql_query($qry);
 			header("Location: profile.php");
 		} else {
 			@mysql_free_result($result);

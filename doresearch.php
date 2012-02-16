@@ -20,6 +20,8 @@
 			@mysql_free_result($result);
 			$qry = "DELETE FROM research WHERE id='$todelete'";
 			mysql_query($qry);
+			$qry = "DELETE FROM researchtags WHERE research='$todelete'";
+			mysql_query($qry);
 			header("Location: profile.php");
 		} else {
 			@mysql_free_result($result);
