@@ -1,5 +1,6 @@
 <?php
 require_once('config/database-connect.php');
+require_once('includes/wordhelper.php');
 
 $input = clean($_GET["query"]);
 
@@ -180,7 +181,7 @@ include('header.php');
 			$paperid = $paper['id'];
 			
 			echo('<section class="result"><header>');
-			echo('<h1>'.$paper['title'].'</h1>');
+			echo('<h1><a href="/'.$paper['username'].'/research/'.cleanSlug($paper['title']).'">'.$paper['title'].'</a></h1>');
 			echo('<h2><a href="/'.$paper['username'].'">'.$paper['author'].'</a>, '.$paper['authorinst'].' ('.$paper['year'].')</h2>');
 			if(!empty($paper['journal'])){
 				echo('<h2>'.$paper['journal']);
@@ -222,7 +223,7 @@ include('header.php');
 			$talkid = $talk['id'];
 			
 			echo('<section class="result"><header>');
-			echo('<h1>'.$talk['title'].'</h1>');
+			echo('<h1><a href="/'.$talk['username'].'/talks/'.cleanSlug($talk['title']).'">'.$talk['title'].'</a></h1>');
 			echo('<h2><a href="/'.$talk['username'].'">'.$talk['speaker'].'</a>, ');
 			if(!empty($talk['locdetail'])) echo($talk['locdetail'].', ');
 			echo($talk['inst'].', '.$talk['date'].'</h2>');

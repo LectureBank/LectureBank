@@ -70,8 +70,8 @@ if($search){
 ?>
 
 <meta charset="utf-8" />
-<meta name="description" content="LectureBank is a networking tool designed to connect researchers and event organizers in related scientific fields. Create and discover opportunities to speak and explore new talent for lectures, seminars, conferences, and symposia." />
-<?php if($keywords) echo('<meta name="keywords" content="'.$keywords.'" />'); ?>
+<?php echo $metadescription ? '<meta name="description" content="'.$metadescription.'" />' : '<meta name="description" content="LectureBank is a networking tool designed to connect researchers and event organizers in related scientific fields. Create and discover opportunities to speak and explore new talent for lectures, seminars, conferences, and symposia." />' ?>
+<?php if($metakeywords) echo('<meta name="keywords" content="'.$metakeywords.'" />'); ?>
 <?php if($author) echo('<meta name="author" content="'.$author.'" />'); ?>
 <meta name="google-site-verification" content="4wiL81U5wsXJ0uhXk-LK-EA0NE9sokF2T_ehY53R9Os" />
 <title><?php echo $title; ?> | LectureBank</title>

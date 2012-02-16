@@ -3,6 +3,7 @@
 	
 	/* Connect to the database */
 	require_once('config/database-connect.php');
+	require_once('includes/wordhelper.php');
 	
 	$username = clean($_GET["user"]);
 	$today = date("Y-m-d");
@@ -97,7 +98,7 @@ if(($protected && $logged_in) || !$protected) {
 		$title = "My Profile";
 	}
 	$author = $name;
-	$keywords = implode(",", $interests);
+	$metakeywords = implode(",", $interests);
 	$profile = true;
     include('header.php');
 ?>
@@ -106,7 +107,7 @@ if(($protected && $logged_in) || !$protected) {
 <header itemscope itemtype="http://schema.org/Person">
 <hgroup>
 <h2><?php echo (!empty($name)) ? '<span itemprop="name">'.$name.'</span>' : "No name entered"; ?></h2>
-<h3><?php echo (!empty($inst)) ? '<span itemprop="affiliation" itemscope itemtype="http://schema.org/Organization">'.$inst.'</span>' : "No institution entered"; ?></h3>
+<h3><?php echo (!empty($inst)) ? '<span itemprop="affiliation" itemscope itemtype="http://schema.org/Organization"><span itemprop="name">'.$inst.'</span></span>' : "No institution entered"; ?></h3>
 <h4><?php echo (!empty($field)) ? $field : "No field entered"; ?></h4>
 </hgroup>
 <?php echo('<a href="mailto:'.$email.'" itemprop="email">'.$email.'</a>'); ?>, <?php echo (!empty($zip)) ? '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="postalCode">'.$zip.'</span></span>' : "No ZIP entered"; ?>
@@ -132,7 +133,8 @@ if(($protected && $logged_in) || !$protected) {
 		foreach($schedlist as $scheditem) {
 			echo ('<article itemscope itemtype="http://schema.org/EducationEvent">');
 			echo ("<header>");
-			echo (!empty($scheditem['link'])) ? '<a itemprop="url" href="'.$scheditem['link'].'"><span itemprop="name">'.$scheditem['title'].'</span></a>' : '<span itemprop="name">'.$scheditem['title'].'</span>';
+			echo ('<a itemprop="url" href="/'.$username.'/talks/'.cleanSlug($scheditem['title']).'"><span itemprop="name">'.$scheditem['title'].'</span></a>');
+			if(!empty($scheditem['link'])) echo (' <a itemprop="url" href="'.$scheditem['link'].'" target="_blank"><img alt="External link" src="/images/external-link-icon.gif"></a>');
 			echo ("</header>");
 			echo ($protected) ? '<div class="profileTool"><a href="/dolecture.php?edit='.$scheditem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/dolecture.php?delete='.$scheditem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
 			echo ("<p class=\"profileSub\">");
@@ -161,7 +163,8 @@ if(($protected && $logged_in) || !$protected) {
 		foreach($prevlist as $previtem) {
 			echo ('<article itemscope itemtype="http://schema.org/EducationEvent">');
 			echo ("<header>");
-			echo (!empty($previtem['link'])) ? '<a itemprop="url" href="'.$previtem['link'].'"><span itemprop="name">'.$previtem['title'].'</span></a>' : '<span itemprop="name">'.$previtem['title'].'</span>';
+			echo ('<a itemprop="url" href="/'.$username.'/talks/'.cleanSlug($previtem['title']).'"><span itemprop="name">'.$previtem['title'].'</span></a>');
+			if(!empty($previtem['link'])) echo (' <a itemprop="url" href="'.$previtem['link'].'" target="_blank"><img alt="External link" src="/images/external-link-icon.gif"></a>');
 			echo ("</header>");
 			echo ($protected) ? '<div class="profileTool"><a href="/dolecture.php?edit='.$previtem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/dolecture.php?delete='.$previtem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
 			echo ("<p class=\"profileSub\">");
@@ -190,8 +193,9 @@ if(($protected && $logged_in) || !$protected) {
 		foreach($reslist as $resitem) {
 			echo ('<article itemscope itemtype="http://schema.org/ScholarlyArticle">');
 			echo ("<header>");
-			echo (!empty($resitem['link'])) ? '<a itemprop="url" href="'.$resitem['link'].'"><span itemprop="name">'.$resitem['title'].'</span></a>' : '<span itemprop="name">'.$resitem['title'].'</span>';
+			echo ('<a itemprop="url" href="/'.$username.'/research/'.cleanSlug($resitem['title']).'"><span itemprop="name">'.$resitem['title'].'</span></a>');
 			echo (!empty($resitem['year'])) ? ' (<span itemprop="datePublished">'.$resitem['year'].'</span>)' : "";
+			if(!empty($resitem['link'])) echo (' <a itemprop="url" href="'.$resitem['link'].'" target="_blank"><img alt="External link" src="/images/external-link-icon.gif"></a>');
 			echo ("</header>");
 			echo ($protected) ? '<div class="profileTool"><a href="/doresearch.php?edit='.$resitem['id'].'"><img alt="Edit this item" src="images/wrench.png"></a> <a href="/doresearch.php?delete='.$resitem['id'].'"><img alt="Delete this item" src="images/minus.png"></a></div>' : "";
 			echo (!empty($resitem['abst'])) ? '<p itemprop="description" id="abst'.$resitem['id'].'" class="profileAbst">'.$resitem['abst'].'</p>' : "";

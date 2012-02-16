@@ -1,5 +1,6 @@
 <?php
 require_once('config/database-connect.php');
+require_once('includes/wordhelper.php');
 
 	$input = clean($_GET["query"]);
 
@@ -96,6 +97,7 @@ $output = '<?xml version="1.0" encoding="UTF-8"?>
 			
 			$output .= '<item>';
 			$output .= '<title>'.$paper['title'].'</title>';
+			$output .= '<link>http://www.lecturebank.org/'.$paper['username'].'/research/'.cleanSlug($paper['title']).'</link>';
 			$output .= '<description>'.$paper['author'].' - ';
 			if(!empty($paper['journal'])) $output .= $paper['journal'].', ';
 			$output .= $paper['year'].' ';
@@ -120,6 +122,7 @@ $output = '<?xml version="1.0" encoding="UTF-8"?>
 			
 			$output .= '<item>';
 			$output .= '<title>'.$talk['title'].'</title>';
+			$output .= '<link>http://www.lecturebank.org/'.$talk['username'].'/talks/'.cleanSlug($talk['title']).'</link>';
 			$output .= '<description>Speaker: '.$talk['speaker'].', Location: ';
 			if(!empty($talk['locdetail'])) $output .= $talk['locdetail'].', ';
 			$output .= $talk['inst'].', Date: '.$talk['date'].' ';

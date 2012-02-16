@@ -11,6 +11,8 @@ RewriteRule ^search\/?$ ./supersearch.php
 RewriteRule ^search/([^/]+)$ ./supersearch.php?query=$1 [last]
 RewriteRule ^events\/?$ ./show-events.php
 
+RewriteRule ^(\w+)/talks/([^/]+)\/?$ ./showlecture.php?user=$1&lecture=$2
+RewriteRule ^(\w+)/research/([^/]+)\/?$ ./showresearch.php?user=$1&research=$2
 RewriteRule ^(\w+)\/?$ ./profile.php?user=$1
 
 Header set P3P "policyref=\"/w3c/p3p.xml\", CP=\"ALL DSP COR LAW CURa ADMa DEVa TAIa PSAi PSDi IVAi IVDi CONi OUR UNRi PUBi NOR IND PHY ONL UNI COM NAV INT DEM CNT STA PRE LOC\""
