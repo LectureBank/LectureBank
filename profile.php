@@ -29,10 +29,11 @@
 if(($protected && $logged_in) || !$protected) {
 
 	/* Get all user information */
-	$qry = "SELECT name, zip FROM users WHERE id_user=$uid LIMIT 1";
+	$qry = "SELECT name, username, zip FROM users WHERE id_user=$uid LIMIT 1";
     $result = mysql_query($qry);
 	$row = mysql_fetch_array($result);
    	$name  = $row['name'];
+	$username  = $row['username'];
 	$zip = $row['zip'];
 	@mysql_free_result($result);
 	$qry = "SELECT institutions.name FROM institutions, userinstitutions WHERE userinstitutions.uid = $uid && institutions.id = userinstitutions.instid";
