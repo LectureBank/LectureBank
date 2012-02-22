@@ -68,7 +68,7 @@ if(($protected && $logged_in) || !$protected) {
 	}
 	@mysql_free_result($result);
 	
-	$qry = "SELECT id, title, link, yr, abstract FROM research WHERE uid = $uid";
+	$qry = "SELECT id, title, link, yr, abstract FROM research WHERE uid = $uid ORDER BY yr DESC";
 	$result = mysql_query($qry);
 	while($row = mysql_fetch_array($result)) {
 		$reslist[] = array(id => $row['id'], title => $row['title'], link => $row['link'], year => $row['yr'], abst => $row['abstract']);
