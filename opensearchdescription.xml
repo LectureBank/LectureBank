@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<meta http-equiv="content-type" content="application/opensearchdescription+xml; charset=UTF-8" />
  <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
    <ShortName>LectureBank</ShortName>
    <Description>Use LectureBank.org to search for institutions, researchers, papers, and talks.</Description>
