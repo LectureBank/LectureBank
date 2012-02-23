@@ -15,4 +15,6 @@ RewriteRule ^(\w+)/talks/([^/]+)\/?$ ./showlecture.php?user=$1&lecture=$2
 RewriteRule ^(\w+)/research/([^/]+)\/?$ ./showresearch.php?user=$1&research=$2
 RewriteRule ^(\w+)\/?$ ./profile.php?user=$1
 
-AddType application/opensearchdescription+xml opensearchdescription.xml 
+<FilesMatch \opensearchdescription.xml$>
+	AddType application/opensearchdescription+xml opensearchdescription.xml 
+</FilesMatch>
