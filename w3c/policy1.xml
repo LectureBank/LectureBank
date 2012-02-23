@@ -8,6 +8,7 @@
 <POLICY
     name="LectureBank"
     discuri="http://www.lecturebank.org/privacy.php"
+	opturi="http://www.lecturebank.org/privacy.php"
     xml:lang="en">
     <!-- Description of the entity making this policy statement. -->
     <ENTITY>

@@ -56,6 +56,9 @@
 	
 	// Set referrer		
 	selfURL();
+	
+	// Set P3P header
+	header('P3P: policyref="/w3c/p3p.xml", CP="ALL DSP COR LAW CURa ADMa DEVa TAIa PSAi PSDi IVAi IVDi CONi OUR UNRi PUBi NOR IND PHY ONL UNI COM NAV INT DEM CNT STA PRE LOC"');
 
 	}
 ?>
