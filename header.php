@@ -1,5 +1,9 @@
 <?php
 	session_start();
+	
+	// Set P3P header
+	header('P3P: policyref="/w3c/p3p.xml", CP="ALL DSP COR LAW CURa ADMa DEVa TAIa PSAi PSDi IVAi IVDi CONi OUR UNRi PUBi NOR IND PHY ONL UNI COM NAV INT DEM CNT STA PRE LOC"');
+	
 	function strleft($s1, $s2) { 
 		return substr($s1, 0, strpos($s1, $s2));
 	}   
@@ -56,9 +60,6 @@
 	
 	// Set referrer		
 	selfURL();
-	
-	// Set P3P header
-	header('P3P: policyref="/w3c/p3p.xml", CP="ALL DSP COR LAW CURa ADMa DEVa TAIa PSAi PSDi IVAi IVDi CONi OUR UNRi PUBi NOR IND PHY ONL UNI COM NAV INT DEM CNT STA PRE LOC"');
 
 	}
 ?>
