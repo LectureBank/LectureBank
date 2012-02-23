@@ -232,15 +232,8 @@
 <label for="year" onmouseover="tooltip.show('<span class=\'tiptext\'>the year you published or completed your research<br /><br />not required</span>');" onmouseout="tooltip.hide();">Year</label>
 <input type="text" id="year" name="year" <?php if(!empty($prepaper['yr'])) {echo('value="'.$prepaper['yr'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($year).'"');} ?> size="15" />
 <br />
-<?php 
-if(!empty($prepaper['journal']) || !empty($prepaper['volume']) || !empty($prepaper['issue']) || !empty($prepaper['startpg']) || !empty($prepaper['endpg']) || !empty($prepaper['doi']) || !empty($journal) || !empty($volume) || !empty($issue) || !empty($startpg) || !empty($endpg) || !empty($doi)) {
-	echo('<a href="javascript:void()" onclick="toggle_visibility(\'cite\',this);" style="font-size:x-small">hide citation info</a>
-	<div id="cite" style="background:#EEEEFF;">');
-} else {
-	echo('<a href="javascript:void()" onclick="toggle_visibility(\'cite\',this);" style="font-size:x-small">add citation info</a>
-	<div id="cite" style="display:none;background:#EEEEFF;">');
-}
-?>
+<a href="javascript:void()" onclick="toggle_visibility('cite',this);" style="font-size:x-small">hide citation info</a>
+<div id="cite" style="background:#EEEEFF;">
 <label for="journal" class="twocol">Journal</label>
 <input type="text" id="journal" class="twocol" name="journal" <?php if(!empty($prepaper['journal'])) {echo('value="'.$prepaper['journal'].'"');} elseif($_POST['form_submitted']) {echo('value="'.stripcslashes($journal).'"');}?> size="60" />
 <br /><br />
