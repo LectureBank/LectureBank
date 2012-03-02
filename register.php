@@ -36,35 +36,35 @@ if ($_POST['form_submitted'] == '1') {
 	$email = clean($_POST['email']);
 	
 	if(strlen($username)<5){
-		$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Must be at least <strong>5</strong> characters.</font>';
+		$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Must be at least <strong>5</strong> characters.';
 		$errflag = true;
 	}
 	if(strlen($username)>20){
-		$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Must be less than <strong>20</strong> characters.</font>';
+		$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Must be less than <strong>20</strong> characters.';
 		$errflag = true;
 	}
 	if(!preg_match('/^[a-z0-9_]+$/', $username)){
-		$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Use only a-z, 0-9, & underscore</font>';
+		$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Use only a-z, 0-9, & underscore';
 		$errflag = true;
 	}
 	if(strlen($password)<6){
-		$password_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Must be at least <strong>6</strong> characters.</font>';
+		$password_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Must be at least <strong>6</strong> characters.';
 		$errflag = true;
 	}
 	if(strlen($password)>32){
-		$password_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Must be less than <strong>32</strong> characters.</font>';
+		$password_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Must be less than <strong>32</strong> characters.';
 		$errflag = true;
 	}
 	if(strcmp($password, $passwordconfirm) != 0) {
-		$password_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Passwords must match.</font>';
+		$password_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Passwords must match.';
 		$errflag = true;
 	}
 	if(strlen($email)<6){
-		$email_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Too short to validate.</font>';
+		$email_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Too short to validate.';
 		$errflag = true;
 	}
 	else if(!domain_exists($email)) {
-		$email_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Address invalid.</font>';
+		$email_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Address invalid.';
 		$errflag = true;
 	}
 
@@ -74,7 +74,7 @@ if ($_POST['form_submitted'] == '1') {
 		$result = mysql_query($qry);
 		if($result) {
 			if(mysql_num_rows($result) > 0) {
-				$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">&quot;'.$username.'&quot;</strong> is in use.</font>';
+				$username_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;&quot;'.$username.'&quot;</strong> is in use.';
 				$errflag = true;
 			}
 			@mysql_free_result($result);
@@ -87,7 +87,7 @@ if ($_POST['form_submitted'] == '1') {
 		$result = mysql_query($qry);
 		if($result) {
 			if(mysql_num_rows($result) > 0) {
-				$email_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Address in use.</font>';
+				$email_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Address in use.';
 				$errflag = true;
 			}
 			@mysql_free_result($result);
@@ -106,6 +106,7 @@ if ($_POST['form_submitted'] == '1') {
 	{
 	$status = 'verify';
 	$activationkey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();
+	$activationkey = sha1($activationkey);
 	$insert_query = 'insert into 	users (
 					username,
 					password,

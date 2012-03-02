@@ -12,7 +12,8 @@
 	<fieldset id="pt1">
 		<legend align="center"><span>Step </span>1. <span>: Username details</span></legend>
 		<h3>Pick a LectureBank username.</h3>
-        <div class="error"><?php
+		<div class="help">Your username will be part of your profile URL.
+        <div id="usrstatus"><span class="error"><?php
 		if($_SESSION['USERNAME_ERRORS']) {
 			foreach($_SESSION['USERNAME_ERRORS'] as $msg) {
 				echo $msg;
@@ -20,16 +21,15 @@
 			}
 			unset($_SESSION['USERNAME_ERRORS']);
 		}
-		?></div>
-		<div class="help">Your username will be part of your profile URL.
-        <div id="usrstatus"></div></div>
+		?></span></div></div>
 		<label for="username">Username</label>
 		<input type="text" name="username" id="username" tabindex="1" />
 	</fieldset>    
 	<fieldset id="pt2">
 		<legend align="center"><span>Step </span>2. <span>: Email details</span></legend>
 		<h3>Enter your email address.</h3>
-        <div class="error"><?php
+		<div class="help">You must enter a valid email address to activate your account.
+        <div id="emailstatus"><span class="error"><?php
 		if($_SESSION['EMAIL_ERRORS']) {
 			foreach($_SESSION['EMAIL_ERRORS'] as $msg) {
 				echo $msg;
@@ -37,16 +37,15 @@
 			}
 			unset($_SESSION['EMAIL_ERRORS']);
 		}
-		?></div>
-		<div class="help">You must enter a valid email address to activate your account.
-        <div id="emailstatus"></div></div>
+		?></span></div></div>
 		<label for="email">Email</label>
 		<input type="email" id="email" name="email" tabindex="2" />
 	</fieldset>
     <fieldset id="pt3">
 		<legend align="center"><span>Step </span>3. <span>: Password</span></legend>
 		<h3>Choose a password for your new account.</h3>
-        <div class="error"><?php
+		<div class="help">Passwords must be 6-32 characters in length.
+        <div id="pwstatus"><span class="error"><?php
 		if($_SESSION['PASSWORD_ERRORS']) {
 			foreach($_SESSION['PASSWORD_ERRORS'] as $msg) {
 				echo $msg;
@@ -54,9 +53,7 @@
 			}
 			unset($_SESSION['PASSWORD_ERRORS']);
 		}
-		?></div>
-		<div class="help">Passwords must be 6-32 characters in length.
-        <div id="pwstatus"></div></div>
+		?></span></div></div>
 		<label for="password">Password</label>
 		<input type="password" id="password" name="password" tabindex="3" />
 		<label for="passwordconfirm">Repeat Password</label>

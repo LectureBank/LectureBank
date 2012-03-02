@@ -60,7 +60,7 @@
 			$title = "Edit Lecture";
 		} else {
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You do not have permission to edit this record.</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You do not have permission to edit this record.';
 		}
 		@mysql_free_result($checkprelect);
 		
@@ -91,7 +91,7 @@
 				$prelectid = "$uprec";
 			} else {
 				$errors = true;
-				$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You do not have permission to edit this record.</font>';
+				$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You do not have permission to edit this record.';
 				break 3;
 			}
 			@mysql_free_result($permitresult);
@@ -99,13 +99,13 @@
 		
 		if(empty($posttitle)){
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You must enter a title.</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You must enter a title.';
 		}
 		if(!empty($date) && !empty($starttime)) {
 			$start = date("Y-m-d H:i:00", mktime(date("H", strtotime($starttime)),date("i", strtotime($starttime)),00,date("m", strtotime($date)),date("d", strtotime($date)),date("Y", strtotime($date))));
 		} else {
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You must submit a date and time.</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You must submit a date and time.';
 		}
 		
 		if(!empty($date) && !empty($endtime)) {
@@ -116,11 +116,11 @@
 			$location = handle_institution($location);
 			if(empty($location)) {
 				$errors = true;
-				$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">We couldn\'t find that institution. Try a different spelling?</font>';
+				$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;We couldn\'t find that institution. Try a different spelling?';
 			}
 		} else {
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You must enter a sponsoring institution.</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You must enter a sponsoring institution.';
 		}
 		
 		$values = "$uid,";

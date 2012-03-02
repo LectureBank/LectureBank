@@ -6,19 +6,15 @@
 	
 	$queryString = $_SERVER['QUERY_STRING'];
 
-	$query = "SELECT * FROM users";
+	$query = "SELECT * FROM users WHERE status = 'verify' AND activationkey = '$queryString'";
 
-	$result = mysql_query($query) or die(mysql_error());
-	while($row = mysql_fetch_array($result)){
-		if ($queryString == $row["activationkey"]){
-			$success = true;
-			$sql="UPDATE users SET activationkey = '', status='activated' WHERE (id_user = $row[id_user])";
-			if (!mysql_query($sql))
-			{
-				die('Error: ' . mysql_error());
-			}
-		}
+	$result = mysql_query($query);
+	if($result && (mysql_num_rows($result) > 0)) {
+		$success = true;
+		$updateqry="UPDATE users SET activationkey = NULL, status = 'activated' WHERE (id_user = $row[id_user])";
+		mysql_query($updateqry);
 	}
+	@mysql_free_result($result);
 
 	include('header.php');
 	

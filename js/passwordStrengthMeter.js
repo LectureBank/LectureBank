@@ -3,10 +3,10 @@
 // Firas Kassem  phiras.wordpress.com || phiras at gmail {dot} com
 // for more information : http://phiras.wordpress.com/2007/04/08/password-strength-meter-a-jquery-plugin/
 
-var shortPass = '<img src="/images/error.png" align="absmiddle"><font color="red"> Must be at least <strong>6</strong> characters.</font>'
-var badPass = '<img src="/images/tick.gif" align="absmiddle"><font color="orange"> Weak password.</font>'
-var goodPass = '<img src="/images/tick.gif" align="absmiddle"><font color="yellowgreen"> Good password.</font>'
-var strongPass = '<img src="/images/tick.gif" align="absmiddle"><font color="green"> Strong password.</font>'
+var shortPass = '<span class="error"><img src="/images/error.png" align="absmiddle">&nbsp;Must be at least <strong>6</strong> characters.</span>'
+var badPass = '<span style="color:orange;"><img src="/images/tick.gif" align="absmiddle">&nbsp;Weak password.</span>'
+var goodPass = '<span style="color:yellowgreen;"><img src="/images/tick.gif" align="absmiddle">&nbsp;Good password.</span>'
+var strongPass = '<span style="color:green;"><img src="/images/tick.gif" align="absmiddle">&nbsp;Strong password.</span>'
 
 
 

@@ -52,7 +52,7 @@
 			$title = "Edit Research";
 		} else {
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You do not have permission to edit this record.</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You do not have permission to edit this record.';
 		}
 		@mysql_free_result($checkprepaper);
 		
@@ -84,7 +84,7 @@
 			$prepaperid = "$uprec";
 		} else {
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You do not have permission to edit this record.</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You do not have permission to edit this record.';
 			break 3;
 		}
 		@mysql_free_result($permitresult);
@@ -92,43 +92,43 @@
 	
 	if(empty($posttitle)){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">You must enter a title.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;You must enter a title.';
 	}
 	if(!empty($year) && (!is_numeric($year) || strlen($year) != 4)){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Year must be a number entered in the format YYYY.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Year must be a number entered in the format YYYY.';
 	}
 	if(!empty($volume) && !is_numeric($volume)){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Volume must be a number.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Volume must be a number.';
 	}
 	if(!empty($volume) && strlen($volume) > 5){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Volume number must be five digits or less.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Volume number must be five digits or less.';
 	}
 	if(!empty($issue) && !is_numeric($issue)){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Issue must be a number.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Issue must be a number.';
 	}
 		if(!empty($issue) && strlen($issue) > 5){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Issue number must be five digits or less.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Issue number must be five digits or less.';
 	}
 	if(!empty($startpg) && !is_numeric($startpg)){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Start Page must be a number.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Start Page must be a number.';
 	}
 	if(!empty($startpg) && strlen($startpg) > 5){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Start Page must be five digits or less.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Start Page must be five digits or less.';
 	}
 	if(!empty($endpg) && !is_numeric($endpg)){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">End Page must be a number.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;End Page must be a number.';
 	}
 	if(!empty($endpg) && strlen($endpg) > 5){
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">End Page must be five digits or less.</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;End Page must be five digits or less.';
 	}
 	
 	$values = "$uid,";

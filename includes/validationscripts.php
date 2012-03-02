@@ -1,5 +1,6 @@
 <script src="/js/jquery-1.5.2.min.js" type="text/javascript"></script>
 <script src="/js/passwordStrengthMeter.js" type="text/javascript" ></script>
+<script src="/js/passwordValidation.js" type="text/javascript" ></script>
 <script type="text/javascript">
 <!--
 /*
@@ -18,12 +19,15 @@ if(usr.length >= 5)
 {
 	if(usr.length > 20)
 	{
-	$("#usrstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Must be less than <strong>20</strong> characters.</font>');
+	$("#usrstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;Must be less than <strong>20</strong> characters.');
+	$("#usrstatus").addClass('error');
+	
 	$("#username").removeClass('object_ok'); // if necessary
 	$("#username").addClass("object_error");
 	}
 	else
 	{
+	$("#usrstatus").removeClass('error');
 	$("#usrstatus").html('<img src="/images/loader.gif" align="absmiddle">&nbsp;Checking availability...');
 
     $.ajax({
@@ -36,12 +40,14 @@ if(usr.length >= 5)
 
 	if(msg == 'OK')
 	{
+		$("#usrstatus").removeClass('error');
         $("#username").removeClass('object_error'); // if necessary
 		$("#username").addClass("object_ok");
 		$(this).html('<img src="/images/tick.gif" align="absmiddle">&nbsp;&quot;'+usr+'&quot;&nbsp;is available!');
 	}
 	else
 	{
+		$("#usrstatus").addClass('error');
 		$("#username").removeClass('object_ok'); // if necessary
 		$("#username").addClass("object_error");
 		$(this).html(msg);
@@ -53,98 +59,11 @@ if(usr.length >= 5)
 }
 else
 	{
-	$("#usrstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">' +
-'Must be at least <strong>5</strong> characters.</font>');
+	$("#usrstatus").addClass('error');
+	$("#usrstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;' +
+'Must be at least <strong>5</strong> characters.');
 	$("#username").removeClass('object_ok'); // if necessary
 	$("#username").addClass("object_error");
-	}
-
-});
-
-});
-
-//-->
-
-</script>
-<script type="text/javascript">
-<!--
-
-var confirmationentered = false;
-
-$(document).ready(function(){
-
-$("#password").keyup(function() { 
-
-var pw = $("#password").val();
-var pwc = $("#passwordconfirm").val();
-
-if(pw.length >= 6)
-	{
-	if(pw.length > 32)
-		{
-		$("#pwstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">' +
-		'Must be less than <strong>32</strong> characters.</font>');
-		$("#password").removeClass('object_ok'); // if necessary
-		$("#password").addClass("object_error");
-		}
-	else
-		{
-		$('#pwstatus').html(passwordStrength($('#password').val(),$('#username').val()));
-		$("#password").removeClass('object_error'); // if necessary
-		$("#password").addClass("object_ok");
-		
-		if((confirmationentered == true))
-			{
-				if(pw != pwc)
-					{
-					$("#pwstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">' +
-					'Passwords must match.</font>');
-					$("#password").removeClass('object_ok'); // if necessary
-					$("#passwordconfirm").removeClass('object_ok'); // if necessary
-					$("#passwordconfirm").addClass("object_error");
-					}
-				else
-					{
-					$("#password").removeClass('object_error'); // if necessary
-					$("#password").addClass("object_ok");
-					$("#passwordconfirm").removeClass('object_error'); // if necessary
-					$("#passwordconfirm").addClass("object_ok");
-					}
-			}
-		}
-	}
-else
-	{
-	$("#pwstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">' +
-'Must be at least <strong>6</strong> characters.</font>');
-	$("#password").removeClass('object_ok'); // if necessary
-	$("#password").addClass("object_error");
-	}
-
-});
-
-$("#passwordconfirm").keyup(function() { 
-
-confirmationentered = true;
-
-var pw = $("#password").val();
-var pwc = $("#passwordconfirm").val();
-
-if(pw != pwc)
-	{
-	$("#pwstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">' +
-	'Passwords must match.</font>');
-	$("#password").removeClass('object_ok'); // if necessary
-	$("#passwordconfirm").removeClass('object_ok'); // if necessary
-	$("#passwordconfirm").addClass("object_error");
-	}
-else
-	{
-	$('#pwstatus').html(passwordStrength($('#password').val(),$('#username').val()));
-	$("#password").removeClass('object_error'); // if necessary
-	$("#password").addClass("object_ok");
-	$("#passwordconfirm").removeClass('object_error'); // if necessary
-	$("#passwordconfirm").addClass("object_ok");
 	}
 
 });
@@ -177,12 +96,14 @@ $("#emailstatus").html('<img src="/images/loader.gif" align="absmiddle">&nbsp;Ch
 
 	if(msg == 'OK')
 	{
+		$("#emailstatus").removeClass('error');
         $("#email").removeClass('object_error'); // if necessary
 		$("#email").addClass("object_ok");
 		$(this).html('<img src="/images/tick.gif" align="absmiddle">&nbsp;Address validated.');
 	}
 	else
 	{
+		$("#emailstatus").addClass('error');
 		$("#email").removeClass('object_ok'); // if necessary
 		$("#email").addClass("object_error");
 		$(this).html(msg);
@@ -197,8 +118,9 @@ $("#emailstatus").html('<img src="/images/loader.gif" align="absmiddle">&nbsp;Ch
 }
 else
 	{
-	$("#emailstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">' +
-'Too short to validate.</font>');
+	$("#emailstatus").addClass('error');
+	$("#emailstatus").html('<img src="/images/error.png" align="absmiddle">&nbsp;' +
+'Too short to validate.');
 	$("#email").removeClass('object_ok'); // if necessary
 	$("#email").addClass("object_error");
 	}

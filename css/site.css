@@ -408,7 +408,7 @@ nav#abouttop ul li {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	font-size: 4em;
+	font-size: x-large;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	color: #000000;
 	}
@@ -417,29 +417,33 @@ nav#abouttop ul li {
 	}
 #theform fieldset h3 {
 	height: 4em;
-	font-size: 1em;
+	font-size: medium;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	}
-#theform fieldset div.help {
+.help {
 	color: #485e49;
-	font-size: 0.7em;
+	font-size: x-small;
 	font-weight: bold;
 	height: 5em;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	}
+#resetpw .help {
+	height: 2em;
+}
 .error {
-	font-size: 0.7em;
+	color: red;
+	font-size: x-small;
 	font-weight: bold;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	text-align: center;
 }
-#theform fieldset label {
-	font-size: 0.7em;
+#theform fieldset label, #resetpw label {
+	font-size: x-small;
 	display: block;
 	line-height: 1.5em;
 	}
-#theform fieldset input {
-	font-size: 0.8em;
+#theform fieldset input, #resetpw input {
+	font-size: small;
 	height: 1.2em;
 	}
 
@@ -459,11 +463,11 @@ nav#abouttop ul li {
 	width: 22em;
 	float: left;
 	padding: 10px;
-	font-size: 0.7em;
+	font-size: x-small;
 	}
 #theform #pt4 input {
 	height: 5em;
-	font-size: 1em;
+	font-size: medium;
 	width: 18em;
 	color: #666666; 
 	background: #f3f3f3;
@@ -587,4 +591,8 @@ color: #333333;
 {
 border: 1px solid #AC3962;
 color: #333333;
+}
+
+#recaptcha_area {
+	margin: 0 auto;
 }

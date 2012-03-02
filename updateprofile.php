@@ -25,7 +25,7 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 	$ziplocate = handle_zip($zip);
 	if(empty($ziplocate)) {
 		$errors = true;
-		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Sorry, we couldn\'t locate that zip code. Try entering it again?</font>';
+		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Sorry, we couldn\'t locate that zip code. Try entering it again?';
 	} else {
 		$qry = "UPDATE users SET name='$name', zip='$zip' WHERE id_user=$uid";
 		mysql_query($qry);
@@ -38,7 +38,7 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 		$instid = handle_institution($institution);
 		if(empty($instid)) {
 			$errors = true;
-			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">We couldn\'t find that institution. Try a different spelling?</font>';
+			$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;We couldn\'t find that institution. Try a different spelling?';
 		} else {
 			$qry = "INSERT INTO userinstitutions (uid,instid) VALUES ($uid,$instid) ON DUPLICATE KEY UPDATE instid=$instid";
 			mysql_query($qry);

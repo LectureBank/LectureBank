@@ -34,11 +34,14 @@ function confirmUser($email, $password){
    @mysql_free_result($result);
    
    /* Validate that password is correct */
-   if($password == $dbarray['password']){
-	   if($dbarray['status'] == 'activated'){
+   if(strcmp($password,$dbarray['password']) == 0){
+	   if(strcmp($dbarray['status'],'activated') == 0){
       		return 0; //Success! email and password confirmed, account active
-	   }
-	   else{
+	   } elseif(strcmp($dbarray['status'],'forgotpw') == 0) {
+		    $rememberpwqry = "UPDATE users SET activationkey = NULL, status = 'activated' WHERE email = '$email'";
+			mysql_query($rememberpwqry);
+			return 0; //User forgot but then remembered password, so we'll change the status back-still successful
+	   } else {
 		    return 3; //Indicates inactive account
 	   }
    }
@@ -91,13 +94,13 @@ if($_POST['login_submitted'] == '1'){
    /* Check error codes */
    if($result != 0){
    if($result == 1){
-      $login_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">No account with that email.</font>';
+      $login_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;No account with that email.';
    }
    else if($result == 2){
-      $login_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Incorrect password.</font>';
+      $login_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Incorrect password.';
    }
    else if($result == 3){
-      $login_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Account must be activated.</font>';
+      $login_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;Account must be activated.';
    }
    $_SESSION['LOGIN_ERRORS'] = $login_errors;
    session_write_close();

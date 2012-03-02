@@ -25,7 +25,7 @@ if(domain_exists($email)) {
 
 	if(mysql_num_rows($sql_check))
 		{
-		echo '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Address in use.</font>';
+		echo '<img src="/images/error.png" align="absmiddle">&nbsp;Address in use.';
 		}
 	else
 		{
@@ -33,7 +33,7 @@ if(domain_exists($email)) {
 		}
 	}
 else {
-  	echo '<img src="/images/error.png" align="absmiddle">&nbsp;<font color="red">Address invalid.</font>';
+  	echo '<img src="/images/error.png" align="absmiddle">&nbsp;Address invalid.';
 }
 }
 ?>
