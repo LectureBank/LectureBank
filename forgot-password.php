@@ -38,7 +38,7 @@ if ($_POST['form_submitted'] == '1') {
 		
 		$forgotpwemail = "Hello from LectureBank!
 
-We recieved a request to reset the password for the account associated with this email address. If you made this request, please follow the instructions below.
+We received a request to reset the password for the account associated with this email address. If you made this request, please follow the instructions below.
 
 If you did not request to have your password reset, you can safely ignore this email. We assure you that your account is safe. If you have any questions or concerns, or if you believe this request may be the result of fraudulent activity, you can email our support team at admin@lecturebank.org. 
 
@@ -61,7 +61,7 @@ The LectureBank.org Team";
 		
 		echo('<h1>Forgot Password</h1>');
 		echo('<h2>Request Successfully Submitted</h2>');
-		echo('<p>You will soon be recieving an email at the indicated address that includes instructions and a link to reset your password.</p>');
+		echo('<p>You will soon be receiving an email at the indicated address that includes instructions and a link to reset your password.</p>');
 	} else {
 		$errors = true;
 		$form_errors[] = '<img src="/images/error.png" align="absmiddle">&nbsp;That email address was not found in our records. Please try again.';

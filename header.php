@@ -145,9 +145,10 @@ if($search){
 	}
 	?>
 	  
-			<li><a href="/events">Events</a></li>
-			<li><a href="#">Planners</a></li>
-			<li><a href="#">Speakers</a></li>
+			<li><a href="/search">Search</a></li>
+            <li><a href="/events">Events</a></li>
+			<li><a href="/planners">Planners</a></li>
+			<li><a href="/speakers">Speakers</a></li>
 			<li><a href="/about.php">About Us</a></li>
 	</ul>
 </nav>

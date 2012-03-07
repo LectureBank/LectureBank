@@ -10,6 +10,8 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^search\/?$ ./supersearch.php
 RewriteRule ^search/([^/]+)$ ./supersearch.php?query=$1 [last]
 RewriteRule ^events\/?$ ./show-events.php
+RewriteRule ^planners\/?$ ./planners.php
+RewriteRule ^speakers\/?$ ./speakers.php
 
 RewriteRule ^(\w+)/talks/([^/]+)\/?$ ./showlecture.php?user=$1&lecture=$2
 RewriteRule ^(\w+)/research/([^/]+)\/?$ ./showresearch.php?user=$1&research=$2

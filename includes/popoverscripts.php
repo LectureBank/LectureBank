@@ -1,4 +1,3 @@
-<script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <script>
 var $overlay_wrapper;
 var $overlay_panel;

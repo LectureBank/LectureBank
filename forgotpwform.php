@@ -13,7 +13,7 @@
 <form action="/forgot-password.php" method="post">
 <label for="email">Email</label>
 <input type="text" size="80" name="email" <?php if($_POST['form_submitted'] == '1' && $email) echo('value="'.$email.'"'); ?> /><br /><br />
-<label for="recaptcha_response_field">Confirm your're a person</label><br />
+<label for="recaptcha_response_field">Confirm you're a person</label><br />
 <?php
 $publickey = "6LfWWc4SAAAAAEowLGUTTFycOd0vTzn3_j7v3pMD";
 echo recaptcha_get_html($publickey);

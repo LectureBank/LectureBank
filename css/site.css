@@ -74,7 +74,6 @@ div.resdetails ul li {
 }
 
 ul.lecture li {
-	
 	background: url(../images/bullet-lecture.png) no-repeat center left;
 }
 
@@ -279,7 +278,7 @@ nav#main {
 }
 nav#main ul {
 	padding-top: 10px;
-	width: 525px;
+	width: 650px;
 	margin: auto;
 	z-index: 50;
 }
@@ -479,13 +478,13 @@ nav#abouttop ul li {
 	float: right;
 	}
 	
-#profile, #research, #lecture {
+#profile, #research, #lecture, #opportunity {
   	margin-left: auto;
 	margin-right: auto;
   	padding: 10px;
-  	min-width: 500px;
-  	max-width: 600px;
-  	width: 560px;
+  	min-width: 550px;
+  	max-width: 650px;
+  	width: 600px;
 }
 
 #profile fieldset, #research fieldset, #lecture fieldset {
@@ -595,4 +594,26 @@ color: #333333;
 
 #recaptcha_area {
 	margin: 0 auto;
+}
+
+section.opp-results h1 {
+	font-size: small;
+}
+
+section.opp-results h2 {
+	font-size: x-small;
+}
+
+#leftcol-results {
+	width:48%;
+	float:left;
+	clear:left;
+	margin-left:0;
+}
+
+#rightcol-results {
+	width:48%;
+	float:right;
+	clear:right;
+	margin-right:0;
 }
