@@ -49,7 +49,7 @@ include('header.php');
 <?php
 	if(!empty($input)){
 	echo('<form action="/supersearch.php" method="get">');
-	echo('<input type="text" size="80" name="query" value="'.$input.'" />');
+	echo('<input type="search" size="80" name="query" value="'.$input.'" />');
 	echo('<input type="submit" value="Search" />');
 	echo('</form>');
 	echo('You searched for <strong>"'.$input.'"</strong>');
@@ -255,7 +255,7 @@ include('header.php');
 	} else {
 		echo('<h3>LectureBank SuperSearch</h3>');
 		echo('<form action="/supersearch.php" method="get">');
-		echo('<input type="text" size="100" name="query" /><br />');
+		echo('<input type="search" size="100" name="query" /><br />');
 		echo('<input type="submit" value="Search" />');
 		echo('</form><br />');
 	}

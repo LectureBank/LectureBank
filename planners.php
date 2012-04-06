@@ -42,7 +42,7 @@ include('header.php');
 <?php
 	if(!empty($input)){
 	echo('<form action="/supersearch.php" method="get">');
-	echo('<input type="text" size="80" name="query" value="'.$input.'" />');
+	echo('<input type="search" size="80" name="query" value="'.$input.'" />');
 	echo('<input type="submit" value="Search" />');
 	echo('</form>');
 	echo('You searched for <strong>"'.$input.'"</strong>');
@@ -250,7 +250,7 @@ include('header.php');
 		echo('<section id="leftcol-results">');
 		echo('<form action="/supersearch.php" method="get" style="margin:auto;padding-top:1.25em;">');
 		echo('<label for="query">Search Speakers</label><br />');
-		echo('<input type="text" size="70" name="query" />');
+		echo('<input type="search" size="70" name="query" />');
 		echo('<input type="submit" value="Search" />');
 		echo('</form>');
 		echo('</section>');

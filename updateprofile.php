@@ -19,6 +19,7 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 	$institution = clean($_POST["institution"]);
 	$zip = clean($_POST["zip"]);
 	$field = clean($_POST["field"]);
+	$otherfield = clean($_POST["otherfield"]);
 	$intinput = clean($_POST["interests"]);
 	$intarray = explode(",",$intinput);
 	
@@ -31,8 +32,13 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 		mysql_query($qry);
 	}
 	
-	$qry = "INSERT INTO userfields (uid,fcode,type) VALUES ($uid,'$field','PRIM') ON DUPLICATE KEY UPDATE fcode='$field'";
-	mysql_query($qry);
+	if (!empty($field) && $field == "OTH" && !empty($otherfield)){
+		$qry = "INSERT INTO userfields (uid,fcode,type) VALUES ($uid,'$otherfield','OTHER') ON DUPLICATE KEY UPDATE fcode='$otherfield', type='OTHER'";
+		mysql_query($qry);
+	} elseif(!empty($field)){
+		$qry = "INSERT INTO userfields (uid,fcode,type) VALUES ($uid,'$field','PRIM') ON DUPLICATE KEY UPDATE fcode='$field', type='PRIM'";
+		mysql_query($qry);
+	}
 	
 	if(!empty($institution)){
 		$instid = handle_institution($institution);
@@ -92,11 +98,18 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
    		$preinst  = json_encode($row);
 	}
 	@mysql_free_result($result);
-	$qry = "SELECT fields.code FROM fields, userfields WHERE userfields.uid = $uid && fields.code = userfields.fcode";
+	$qry = "SELECT CASE WHEN userfields.type = 'PRIM' THEN fields.code ELSE 'OTH' END AS code FROM fields, userfields WHERE (userfields.type = 'PRIM' && userfields.uid = $uid && fields.code = userfields.fcode) OR (userfields.type = 'OTHER' && userfields.uid = $uid)";
 	$result = mysql_query($qry);
 	$row = mysql_fetch_array($result);
    	$prefield  = $row['code'];
 	@mysql_free_result($result);
+	if($prefield == "OTH") {
+		$qry = "SELECT userfields.fcode AS name FROM userfields WHERE userfields.type = 'OTHER' && userfields.uid = $uid";
+		$result = mysql_query($qry);
+		$row = mysql_fetch_array($result);
+		$preotherfield  = $row['name'];
+		@mysql_free_result($result);
+	}
 	
 	$qry = "SELECT tags.id, tags.tag FROM tags, userinterests WHERE userinterests.uid = $uid && tags.id = userinterests.intid";
 	$result = mysql_query($qry);
@@ -115,7 +128,7 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 	@mysql_free_result($result);
 
 	/* Get the list of "broader fields of study" */
-	$qry = "SELECT * FROM fields";
+	$qry = "SELECT * FROM fields ORDER BY name";
     $result = mysql_query($qry);
 	$fields = array();
 	while ($row = mysql_fetch_array($result)) {
@@ -163,8 +176,22 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 <label for="zip" class="twocol" onmouseover="tooltip.show('<span class=\'tiptext\'>so we can show you relevant opportunities near you</span>');" onmouseout="tooltip.hide();">ZIP Code</label>
 <input type="text" class="twocol" id="zip" name="zip" value="<?php echo($prezip) ?>" size="15" />
 <br /><br />
+<script type="text/javascript">
+function showother(obj) {
+val = obj.options[obj.selectedIndex].value;
+document.getElementById('otherfield').style.display = 'none';
+if ( val.match('OTH') ) {
+	document.getElementById('otherfield').removeAttribute('style')
+}}
+$(document).ready(function() {
+	var field_element = document.getElementById('field');
+	if (!(field_element.options[field_element.selectedIndex].value.match('OTH'))) {
+		document.getElementById('otherfield').style.display = 'none';
+	}
+});
+</script>
 <label for="field" class="twocol"  onmouseover="tooltip.show('<span class=\'tiptext\'>the field that best matches your degree program<br /><br />we\'re adding new fields regularly.<br />if yours isn\'t here, click and let us know!</span>');" onmouseout="tooltip.hide();"><a href="mailto:admin@lecturebank.org" style="text-decoration:none; color:black;">Primary Field of Study</a></label>
-<select id="field" class="twocol" name="field">
+<select id="field" class="twocol" name="field" onchange="showother(this);">
   <?php if (empty($prefield)) echo("<option selected></option>") ?>
   <?php
   	/* While loop to list all of the field options from the database */
@@ -179,6 +206,7 @@ if ($_POST['form_submitted'] == '1' && !empty($uid)) {
 	}
   ?>
 </select>
+<input type="text" id="otherfield" name="otherfield" size="30" value="<?php echo($preotherfield) ?>" />
 <br /><br />
 <label for="interests" class="twocol"   onmouseover="tooltip.show('<span class=\'tiptext\'>some key words to describe your research focus<br />and your scientific interests<br /><br />be specific! add as many as you like<br />start typing and we\'ll make some suggestions</span>');" onmouseout="tooltip.hide();"><div class="taglabel">Areas of Interest<br /><small>Keywords</small></div></label>
 <input type="text" class="twocol" id="interests" name="interests" size="60" />

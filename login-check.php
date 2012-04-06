@@ -135,8 +135,9 @@ if($_POST['login_submitted'] == '1'){
 	   session_write_close();
 	   header("Location: ".$_SESSION['protected_page']);
    } else {
+	   $_SESSION['init_login'] = true;
 	   session_write_close();
-	   header("Location: /".$username);
+	   header("Location: /profile.php");
    }
    return;
 }

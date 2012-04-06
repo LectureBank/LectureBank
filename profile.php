@@ -41,10 +41,14 @@ if(($protected && $logged_in) || !$protected) {
 	$row = mysql_fetch_array($result);
    	$inst  = $row['name'];
 	@mysql_free_result($result);
-	$qry = "SELECT fields.name FROM fields, userfields WHERE userfields.uid = $uid && fields.code = userfields.fcode";
+	$qry = "SELECT CASE WHEN userfields.type = 'PRIM' THEN fields.name ELSE userfields.fcode END AS name FROM fields, userfields WHERE (userfields.type = 'PRIM' && userfields.uid = $uid && fields.code = userfields.fcode) OR (userfields.type = 'OTHER' && userfields.uid = $uid)";
 	$result = mysql_query($qry);
 	$row = mysql_fetch_array($result);
-   	$field  = $row['name'];
+	if($row['code'] != "OTH") {
+   		$field  = $row['name'];
+	} else {
+		
+	}
 	@mysql_free_result($result);
 	
 	$qry = "SELECT tags.id, tags.tag FROM tags, userinterests WHERE userinterests.uid = $uid && tags.id = userinterests.intid";
@@ -96,7 +100,17 @@ if(($protected && $logged_in) || !$protected) {
 			}
 		}
 	} else {
-		$title = "My Profile";
+		//Check if initial login
+		if(isset($_SESSION['init_login']) && $_SESSION['init_login'] == true){
+			$_SESSION['init_login'] = false;
+			unset($_SESSION['init_login']);
+			//Check if profile data is filled in
+			if(empty($name) || empty($inst) || empty($field) || empty($zip) || empty($interests)) {
+				//If not, redirect to the form first
+				header("Location: /updateprofile.php");
+			}
+		}
+		$title = "Your Profile";
 	}
 	$author = $name;
 	$metakeywords = implode(",", $interests);
