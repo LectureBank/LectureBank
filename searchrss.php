@@ -64,7 +64,7 @@ $output = '<?xml version="1.0" encoding="UTF-8"?>
 	
 		foreach($peoplelist as $person) {
 			$persid = $person['id'];
-			$persfieldqry = "SELECT fields.name AS fname FROM fields, userfields WHERE userfields.uid = '$persid' && fields.code = userfields.fcode";
+			$persfieldqry = "SELECT CASE WHEN userfields.type = 'PRIM' THEN fields.name ELSE userfields.fcode END AS fname FROM fields, userfields WHERE (userfields.type = 'PRIM' AND userfields.uid = '$persid' && fields.code = userfields.fcode) OR (userfields.type = 'OTHER' AND userfields.uid = '$persid')";
 			$persfield = mysql_query($persfieldqry);
 			$pfield = mysql_fetch_row($persfield);
 			@mysql_free_result($persfield);
