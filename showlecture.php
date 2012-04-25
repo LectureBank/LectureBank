@@ -79,7 +79,8 @@
 		foreach($lecturetags as $tag) {
 			echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
 		}
-		echo('</span><br />');
+		echo('</span><br /><br />');
+		echo('<span style="font-size:small;color:grey;">Share: <input type="text" value="http://lbnk.tk/'.urlsafe_b64encode("t".$lectureid).'"> </span>');
 		echo('<div class="g-plusone" data-size="small" data-href="http://www.lecturebank.org/'.$lecture['username'].'/talks/'.cleanSlug($lecture['title']).'"></div>');
 		echo('<a href="/calendarevent.php?event='.$lectureid.'"><img alt="Download iCal" src="/images/icalbutton.gif"></a>');
 		echo('<script type="text/javascript">

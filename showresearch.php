@@ -63,8 +63,9 @@
 		foreach($papertags as $tag) {
 			echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
 		}
-		echo('</span><br />');
-		echo('<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="180" data-href="http://www.lecturebank.org/'.$lecture['username'].'/talks/'.cleanSlug($lecture['title']).'"></div>');
+		echo('</span><br /><br />');
+		echo('<span style="font-size:small;color:grey;">Share: <input type="text" value="http://lbnk.tk/'.urlsafe_b64encode("r".$paperid).'"> </span>');
+		echo('<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="180" data-href="http://www.lecturebank.org/'.$paper['username'].'/talks/'.cleanSlug($paper['title']).'"></div>');
 		echo ("</article>");
 		
 	}
