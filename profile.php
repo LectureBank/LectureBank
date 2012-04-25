@@ -125,7 +125,7 @@ if(($protected && $logged_in) || !$protected) {
 <h3><?php echo (!empty($inst)) ? '<span itemprop="affiliation" itemscope itemtype="http://schema.org/Organization"><span itemprop="name">'.$inst.'</span></span>' : "No institution entered"; ?></h3>
 <h4><?php echo (!empty($field)) ? $field : "No field entered"; ?></h4>
 </hgroup>
-<?php echo('<a href="mailto:'.$email.'" itemprop="email">'.$email.'</a>'); ?>, <?php echo (!empty($zip)) ? '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="postalCode">'.$zip.'</span></span>' : "No ZIP entered"; ?>
+<?php echo('<a href="mailto:'.$email.'" itemprop="email" rel="author">'.$email.'</a>'); ?>, <?php echo (!empty($zip)) ? '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span itemprop="postalCode">'.$zip.'</span></span>' : "No ZIP entered"; ?>
 </header>
 <br />
 <span class="tags" style="font-size:small;">

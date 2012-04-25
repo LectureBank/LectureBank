@@ -75,11 +75,14 @@
 		echo ("</header>");
 		echo ('<p itemprop="description">'.$lecture['abst'].'</p>');
 		if(!empty($lecture['link'])) echo ('<a itemprop="url" href="'.$lecture['link'].'" target="_blank">'.$lecture['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
-		echo('<span class="tags">');
-		foreach($lecturetags as $tag) {
-			echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
+		if(!empty($lecturetags)){
+			echo('<span class="tags">');
+			foreach($lecturetags as $tag) {
+				echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
+			}
+			echo('</span><br />');
 		}
-		echo('</span><br /><br />');
+		echo('<br />');
 		echo('<span style="font-size:small;color:grey;">Share: <input type="text" value="http://lbnk.tk/'.urlsafe_b64encode("t".$lectureid).'"> </span>&emsp;');
 		echo('<div class="g-plusone" data-size="small" data-href="http://www.lecturebank.org/'.$lecture['username'].'/talks/'.cleanSlug($lecture['title']).'"></div>');
 		echo('<a href="/calendarevent.php?event='.$lectureid.'"><img alt="Download iCal" src="/images/icalbutton.gif"></a>');

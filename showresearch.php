@@ -59,11 +59,14 @@
 		
 		echo ('<p itemprop="description">'.$paper['abst'].'</p>');
 		if(!empty($paper['link'])) echo ('<a itemprop="url" href="'.$paper['link'].'" target="_blank">'.$paper['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
-		echo('<span class="tags" itemprop="keywords">');
-		foreach($papertags as $tag) {
-			echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
+		if(!empty($papertags)){
+			echo('<span class="tags" itemprop="keywords">');
+			foreach($papertags as $tag) {
+				echo('<a href="/search/'.str_replace(" ","+",$tag).'" rel="tag">'.$tag.'</a> ');
+			}
+			echo('</span><br />');
 		}
-		echo('</span><br /><br />');
+		echo('<br />');
 		echo('<span style="font-size:small;color:grey;">Share: <input type="text" value="http://lbnk.tk/'.urlsafe_b64encode("r".$paperid).'"> </span>&emsp;');
 		echo('<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="180" data-href="http://www.lecturebank.org/'.$paper['username'].'/talks/'.cleanSlug($paper['title']).'"></div>');
 		echo ("</article>");
