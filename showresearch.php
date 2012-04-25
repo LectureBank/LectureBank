@@ -51,14 +51,14 @@
 			if(!empty($paper['issue'])) echo(', iss. '.$paper['issue']);
 			if(!empty($paper['startpg'])) echo(', '.$paper['startpg']);
 			if(!empty($paper['endpg'])) echo('-'.$paper['endpg']);
-			if(!empty($paper['doi'])) echo(' DOI: <a itemprop="url" href="http://dx.doi.org/'.$paper['doi'].'" target="_blank">'.$paper['doi'].' <img alt="Resolve DOI" src="/images/external-link-icon.gif"></a>');
+			if(!empty($paper['doi'])) echo(' DOI: <a itemprop="url" href="http://dx.doi.org/'.$paper['doi'].'" target="_blank" rel="external">'.$paper['doi'].' <img alt="Resolve DOI" src="/images/external-link-icon.gif"></a>');
 			echo('</h3>');
 		}
 		echo('</hgroup>');
 		echo('</header>');
 		
 		echo ('<p itemprop="description">'.$paper['abst'].'</p>');
-		if(!empty($paper['link'])) echo ('<a itemprop="url" href="'.$paper['link'].'" target="_blank">'.$paper['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
+		if(!empty($paper['link'])) echo ('<a itemprop="url" href="'.$paper['link'].'" target="_blank" rel="external">'.$paper['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
 		if(!empty($papertags)){
 			echo('<span class="tags" itemprop="keywords">');
 			foreach($papertags as $tag) {

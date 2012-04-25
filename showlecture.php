@@ -23,10 +23,15 @@
 		$lecture['address'] = $lecture['city'].', '.$lecture['state'].' '.$lecture['zip'];
 		$infostring = '<div style=\"font-size:x-small\">';
 		$infostring .= '<strong>'.$lecture['inst'].'</strong><br />';
+		$destaddr = $lecture['inst'].', ';
 		if(!empty($lecture['addr'])) {
 			$infostring .= $lecture['addr'].'<br />';
+			$destaddr .= $lecture['addr'].', ';
 		}
-		$infostring .= $lecture['address'];
+		$infostring .= $lecture['address'].'<br />';
+		$destaddr .= $lecture['address'];
+		$destaddr = urlencode($destaddr);
+		$infostring .= '<a href="http://maps.google.com/maps?daddr='.$destaddr.'" target="_blank" rel="external nofollow">Get Directions</a>';
 		$infostring .= "</div>";
 		$lecture['machinedate'] = date('Y-m-d',strtotime($lecture['start']));
 		$lecture['humanstart'] = date('g:iA',strtotime($lecture['start']));
@@ -74,7 +79,7 @@
 		echo ("</hgroup>");
 		echo ("</header>");
 		echo ('<p itemprop="description">'.$lecture['abst'].'</p>');
-		if(!empty($lecture['link'])) echo ('<a itemprop="url" href="'.$lecture['link'].'" target="_blank">'.$lecture['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
+		if(!empty($lecture['link'])) echo ('<a itemprop="url" href="'.$lecture['link'].'" target="_blank" rel="external">'.$lecture['link'].'</a> <img alt="External link" src="/images/external-link-icon.gif"><br />');
 		if(!empty($lecturetags)){
 			echo('<span class="tags">');
 			foreach($lecturetags as $tag) {
@@ -97,7 +102,7 @@
 		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 		
 		var infowindow = new google.maps.InfoWindow({
-    		content: "'.$infostring.'"
+    		content: \''.$infostring.'\'
 		});
 		  
 		var marker = new google.maps.Marker({
