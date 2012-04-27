@@ -58,14 +58,14 @@ if(($protected && $logged_in) || !$protected) {
 	}
 	@mysql_free_result($result);
 	
-	$qry = "SELECT lectures.id, lectures.title, lectures.start, lectures.eventname, lectures.abstract, lectures.link, institutions.name FROM lectures, institutions WHERE lectures.creator = $uid AND institutions.id = lectures.loc_id AND lectures.start < '$today'";
+	$qry = "SELECT lectures.id, lectures.title, lectures.start, lectures.eventname, lectures.abstract, lectures.link, institutions.name FROM lectures, institutions WHERE lectures.creator = $uid AND institutions.id = lectures.loc_id AND lectures.start < '$today' ORDER BY lectures.start DESC";
 	$result = mysql_query($qry);
 	while($row = mysql_fetch_array($result)) {
 		$prevlist[] = array(id => $row['id'], title => $row['title'], humandate => date('m/d/Y',strtotime($row['start'])), machinedate => date('Y-m-d',strtotime($row['start'])), microtime => date('c',strtotime($row['start'])), name => $row['eventname'], abst => $row['abstract'], link => $row['link'], inst => $row['name']);
 	}
 	@mysql_free_result($result);
 	
-	$qry = "SELECT lectures.id, lectures.title, lectures.start, lectures.eventname, lectures.abstract, lectures.link, institutions.name FROM lectures, institutions WHERE lectures.creator = $uid AND institutions.id = lectures.loc_id AND lectures.start >= '$today'";
+	$qry = "SELECT lectures.id, lectures.title, lectures.start, lectures.eventname, lectures.abstract, lectures.link, institutions.name FROM lectures, institutions WHERE lectures.creator = $uid AND institutions.id = lectures.loc_id AND lectures.start >= '$today' ORDER BY lectures.start DESC";
 	$result = mysql_query($qry);
 	while($row = mysql_fetch_array($result)) {
 		$schedlist[] = array(id => $row['id'], title => $row['title'], humandate => date('m/d/Y',strtotime($row['start'])), machinedate => date('Y-m-d',strtotime($row['start'])), microtime => date('c',strtotime($row['start'])), name => $row['eventname'], abst => $row['abstract'], link => $row['link'], inst => $row['name']);
