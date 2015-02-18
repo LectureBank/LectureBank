@@ -10,9 +10,14 @@
 
 	$result = mysql_query($query);
 	if($result && (mysql_num_rows($result) > 0)) {
-		$success = true;
-		$updateqry="UPDATE users SET activationkey = NULL, status = 'activated' WHERE (id_user = $row[id_user])";
-		mysql_query($updateqry);
+		$row = mysql_fetch_array($result);
+		if (!empty($row)) {
+			$updateqry="UPDATE users SET activationkey = NULL, status = 'activated' WHERE (id_user = $row[id_user])";
+			$change = mysql_query($updateqry);
+			if($change && (mysql_num_rows($change) > 0))
+			@mysql_free_result($change);
+			$success = true;
+		}
 	}
 	@mysql_free_result($result);
 
